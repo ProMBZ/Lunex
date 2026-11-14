@@ -76,7 +76,7 @@ npm run dev
 
 Open http://localhost:3000.
 
-The project uses Next.js App Router, React 19, JavaScript/JSX, TypeScript for reusable components, Tailwind CSS v4, and Three.js.
+The project uses Next.js App Router, React 19, TypeScript/TSX throughout the website source, Tailwind CSS v4, and Three.js.
 
 ## Project identity
 
