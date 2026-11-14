@@ -144,9 +144,9 @@ Run the host's existing TypeScript check and production build. Verify the model 
 
 Install Node.js 22 LTS from https://nodejs.org/. The project needs Node.js 20.9 or newer; Node 22 matches the original repository's `.nvmrc` and CI version.
 
-### 2. Copy this complete portable folder
+### 2. Download and extract the portable package
 
-Copy the contents of `integration/portable-website/` into your empty folder. Its root should contain `package.json`, `tsconfig.json`, `next.config.mjs`, `three.d.ts`, `README.md` and `app/`.
+After the Portable Lunex handoff CI run succeeds, open the repository's GitHub Actions page, open the latest successful **Portable Lunex handoff CI** run, and download the **lunex-portable-website** artifact. Extract the ZIP into your empty folder. Alternatively, copy the contents of `integration/portable-website/` from the repository. The folder root should contain `package.json`, `tsconfig.json`, `next.config.mjs`, `postcss.config.mjs`, `three.d.ts`, `README.md` and `app/`.
 
 ### 3. Add the original assets
 
