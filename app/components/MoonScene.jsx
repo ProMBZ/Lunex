@@ -65,11 +65,11 @@ export default function MoonScene({ compact = false }) {
     renderer.domElement.setAttribute("tabindex", "0");
     host.appendChild(renderer.domElement);
 
-    scene.add(new THREE.HemisphereLight(0xcfd4d6, 0x181a1c, 1.12));
-    const keyLight = new THREE.DirectionalLight(0xfff0dc, 3.05);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x0B3D91, 1.08));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3.05);
     keyLight.position.set(-4.3, 2.8, 4.5);
     scene.add(keyLight);
-    const fillLight = new THREE.DirectionalLight(0x8f9ca4, 0.22);
+    const fillLight = new THREE.DirectionalLight(0x0B3D91, 0.24);
     fillLight.position.set(3.2, -1.8, -3.7);
     scene.add(fillLight);
 

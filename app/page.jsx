@@ -3,9 +3,9 @@ import MoonPortal from "@/components/mission/moon-portal";
 import ProjectOverview from "./components/ProjectOverview";
 
 export const metadata = {
-  title: "LunaPath — Lunar Landing Site Navigator",
+  title: "LunaPath — Explore the Moon",
   description:
-    "Explore lunar south-pole reference sites, choose an observation date, and understand how terrain, sunlight, Earth visibility and time shape mission planning.",
+    "Explore lunar south-polar locations, choose an observation time, and compare the questions that shape a lunar landing mission.",
 };
 
 export default function HomePage() {
@@ -13,47 +13,46 @@ export default function HomePage() {
     <main id="main-content" className="home-page">
       <section className="hero-main" aria-labelledby="hero-title">
         <div className="hero-layout">
-          <div className="hero-copy" data-reveal="left">
+          <div className="hero-copy">
             <p className="hero-eyebrow">
               <span className="eyebrow-mark" aria-hidden="true" />
               LUNAR LANDING SITE NAVIGATOR
             </p>
             <h1 id="hero-title">
-              Find the right place
+              Explore the Moon.
               <br />
-              <span>and time on the Moon.</span>
+              <span>Think beyond the landing.</span>
             </h1>
             <p className="hero-description">
-              Explore lunar south-pole reference sites, select an observation
-              date, and inspect the conditions that matter to a mission:
-              terrain, sunlight and a view of Earth.
+              LunaPath helps you explore places near the Moon’s south pole.
+              Look around the Moon in 3D, choose a place and a time, and compare
+              the details that matter when planning a mission.
             </p>
+
             <div className="hero-actions">
-              <Link className="hero-action" href="/explorer">
-                <span>Open the Lunar Navigator</span>
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M4.5 10h10.75M10 4.75 15.25 10 10 15.25" />
-                </svg>
+              <Link className="action-button action-button-primary" href="/explorer">
+                <span>Open Mission Explorer</span>
+                <span className="button-arrow" aria-hidden="true">↗</span>
               </Link>
-              <Link className="hero-action-secondary" href="#demo">
-                <span className="play-mark" aria-hidden="true">▶</span>
-                Watch the 30-second demo
+              <Link className="action-button action-button-secondary" href="/presentation">
+                <span className="button-play" aria-hidden="true">▶</span>
+                <span>Watch 30 Seconds</span>
               </Link>
             </div>
-            <div className="hero-proofline" aria-label="Prototype capabilities">
-              <span>REFERENCE LOCATIONS</span>
-              <i />
-              <span>DATE & UTC CONTROLS</span>
-              <i />
+
+            <div className="hero-proofline" aria-label="What LunaPath brings together">
+              <span>MOON IN 3D</span>
+              <i aria-hidden="true" />
+              <span>PLACE & TIME</span>
+              <i aria-hidden="true" />
               <span>SCENARIO COMPARISON</span>
             </div>
             <p className="hero-footnote">
-              A landing site is more than a point. It is a relationship between
-              terrain, light, Earth and time.
+              One place to explore the surface, the sunlight and the view of Earth.
             </p>
           </div>
 
-          <div className="moon-column" aria-label="Interactive 3D Moon model">
+          <div className="moon-column" aria-label="Interactive three-dimensional Moon model">
             <div className="moon-aura" aria-hidden="true" />
             <div className="moon-orbit moon-orbit-one" aria-hidden="true" />
             <div className="moon-orbit moon-orbit-two" aria-hidden="true" />
@@ -62,13 +61,14 @@ export default function HomePage() {
             </div>
             <div className="moon-caption">
               <span>NASA LRO / LOLA</span>
-              <i />
-              <span>GLOBAL ORIENTATION MODEL</span>
+              <i aria-hidden="true" />
+              <span>GLOBAL MOON MODEL</span>
             </div>
           </div>
         </div>
-        <a className="hero-scroll-cue" href="#demo" aria-label="Scroll to the walkthrough">
-          <span>SCROLL TO EXPLORE</span>
+
+        <a className="hero-scroll-cue" href="#project-overview">
+          <span>DISCOVER LUNAPATH</span>
           <i aria-hidden="true" />
         </a>
       </section>

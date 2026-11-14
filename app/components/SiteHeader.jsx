@@ -1,48 +1,47 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-function BrandMark() {
-  return (
-    <svg viewBox="0 0 34 34" fill="none" aria-hidden="true">
-      <circle cx="17" cy="17" r="12.2" />
-      <path d="M4 21.3c6.2-7.5 18-12 26-8.6" />
-      <path d="M9.1 27.1 24.9 6.9" />
-      <circle cx="20.8" cy="12.2" r="2.2" />
-    </svg>
-  );
-}
-
 export default function SiteHeader() {
   const pathname = usePathname();
-  const explorerActive = pathname.startsWith("/explorer");
+  const isHome = pathname === "/";
 
   return (
     <header className="site-header">
       <div className="site-nav">
-        <Link className="brand" href="/" aria-label="LunaPath home">
-          <span className="brand-mark"><BrandMark /></span>
+        <Link className="brand" href="/" aria-label="LunaPath — Back to project information">
+          <Image
+            className="brand-logo"
+            src="/favicon.png"
+            alt=""
+            width={44}
+            height={44}
+            priority
+          />
           <span className="brand-name">LUNAPATH</span>
         </Link>
-        <nav className="nav-destinations" aria-label="Main navigation">
-          <ul>
-            <li>
-              <Link className="nav-link" href="/#how-it-works">
-                <span>How it works</span>
+
+        <nav className="nav-actions" aria-label="Main navigation">
+          {isHome ? (
+            <>
+              <Link className="nav-button nav-button-secondary" href="/presentation">
+                <span className="nav-play" aria-hidden="true">▶</span>
+                <span>Watch 30 Seconds</span>
               </Link>
-            </li>
-            <li>
-              <Link className="nav-link" href="/#science">
-                <span>Science & sources</span>
+              <Link className="nav-button nav-button-primary" href="/explorer">
+                <span>Open Mission Explorer</span>
+                <span className="nav-arrow" aria-hidden="true">↗</span>
               </Link>
-            </li>
-          </ul>
+            </>
+          ) : (
+            <Link className="nav-button nav-button-return" href="/">
+              <span className="nav-return-arrow" aria-hidden="true">←</span>
+              <span>Back to Project Information</span>
+            </Link>
+          )}
         </nav>
-        <Link className={explorerActive ? "nav-cta is-active" : "nav-cta"} href="/explorer">
-          <span>Open Navigator</span>
-          <b aria-hidden="true">↗</b>
-        </Link>
       </div>
     </header>
   );

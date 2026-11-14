@@ -1,11 +1,16 @@
-import MissionExplorer from "@/components/mission/mission-explorer";
+import ComingSoonPage from "../components/ComingSoonPage";
 
 export const metadata = {
-  title: "Lunar Navigator",
-  description:
-    "Select lunar south-polar reference features, set an observation date and UTC hour, inspect spatial context and compare scenarios.",
+  title: "Mission Explorer",
+  description: "The LunaPath Mission Explorer destination is coming soon.",
 };
 
 export default function ExplorerPage() {
-  return <MissionExplorer />;
+  return (
+    <ComingSoonPage
+      eyebrow="LUNAPATH / MISSION EXPLORER"
+      title="Your next stop: the Moon."
+      description="The Mission Explorer experience is coming soon. You’ll be able to return here from the project page whenever you’re ready to explore."
+    />
+  );
 }

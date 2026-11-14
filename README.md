@@ -1,29 +1,29 @@
 # LunaPath — Lunar Landing Site Navigator
 
-LunaPath is a family-built project for the 2026 NASA Space Apps Challenge: **Lunar Landing Site Navigator**. It helps people explore lunar south-polar reference locations and understand the questions that connect place, terrain, sunlight, Earth visibility, and time.
+LunaPath is a family-built lunar exploration project for the 2026 NASA Space Apps Challenge. It helps people explore the Moon and understand the place-and-time questions that matter when thinking about a lunar landing mission.
 
 ## Website
 
-- `/` — project landing page, interactive NASA global Moon model, guided workflow, prototype evidence, sources, and project transparency.
-- `/explorer` — interactive mission navigator for selecting USGS lunar reference features or custom coordinates, choosing an observation date and UTC hour, and comparing scenarios.
-- The explorer's timeline and condition diagrams are explicitly illustrative. They do not represent live ephemerides or validated terrain-horizon results.
+- \`/\` — landing page with an interactive 3D global Moon model and a plain-language project overview.
+- \`/presentation\` — Coming Soon page for the 30-second walkthrough.
+- \`/explorer\` — Coming Soon page for the Mission Explorer.
 
-The landing page includes a guided 30-second interactive walkthrough, traceable reference-site cards, source/methodology explanations, and a project-transparency section.
+The Mission Explorer interface and its supporting components remain in the codebase while the public destination is being prepared.
 
-## What the prototype includes
+## Current project components
 
 - Interactive NASA LRO / LOLA global Moon model for orientation.
-- Named lunar feature reference coordinates from the USGS Gazetteer of Planetary Nomenclature.
-- A mathematical south-polar coordinate projection.
-- Custom lunar coordinate input and validation.
-- Observation date and UTC-hour controls.
-- Site/date scenario comparison.
+- Named lunar feature locations sourced from the USGS Gazetteer of Planetary Nomenclature.
+- Custom lunar coordinate input and validation in the Mission Explorer implementation.
+- Observation date and UTC-hour controls in the Mission Explorer implementation.
+- Site and date scenario comparison in the Mission Explorer implementation.
 - Schematic Sun / Earth horizon diagrams and an illustrative timeline.
-- Source links, methodology notes, and scientific limitations.
+
+The timeline and condition diagrams are illustrative. They are not live ephemerides or validated terrain-horizon results.
 
 ## Scientific status and limitations
 
-The current demonstrator does **not** calculate or claim:
+The current demonstrator does not calculate or claim:
 - Live JPL Horizons / NAIF SPICE positions for a selected lunar observer.
 - Site-specific solar azimuth/elevation or terrain-aware illumination windows.
 - Earth line-of-sight windows through a local LOLA terrain horizon.
@@ -33,41 +33,44 @@ The current demonstrator does **not** calculate or claim:
 
 Those outputs require validated ephemerides and reference frames, local elevation data, a terrain skyline solver, time-window extraction, uncertainty handling, and separate power and radio engineering models. Geometric Earth visibility is not a radio link budget. Solar visibility is not delivered electrical power.
 
-## Data interpretation
-
-The three named feature coordinates displayed on the landing page come from USGS catalogue records. They are reference feature centres (or a listed feature span for Mons Malapert), not surveyed landing coordinates or a suitability assessment. The 30-second walkthrough is an interactive UI guide, not a recording of computed science outputs.
-
 ## NASA Moon model
 
 The interactive Moon expects this local file:
 
-```
+\`\`\`
 public/models/Moon_NASA_LRO_8k_Topo_Small.glb
-```
+\`\`\`
 
-The approximately 77.7 MB binary is intentionally excluded from Git. Keep it in your local `public/models` folder. Verify it with:
+The approximately 77.7 MB binary is intentionally excluded from Git. Keep it in your local \`public/models\` folder. Verify it with:
 
-```bash
+\`\`\`bash
 npm run model:verify
 npm run dev
-```
+\`\`\`
 
-If the file is elsewhere, use `npm run model:select`. The NASA global model is for orientation and context, not a local south-pole DEM or proof of terrain clearance.
+If the file is elsewhere, use \`npm run model:select\`. The global model is for orientation and context, not a local south-pole DEM or proof of terrain clearance.
 
 NASA source: https://svs.gsfc.nasa.gov/14959/
 
+## Visual assets
+
+The landing page uses these public assets:
+- \`public/favicon.png\` — project logo and browser icon.
+- \`public/astronaut.jpg\` — animated astronaut artwork in the overview section.
+- \`public/satellite.png\` — animated satellite artwork in the overview section.
+
 ## Sources and credits
 
-NASA LRO / LOLA global Moon model, USGS lunar feature records, NASA Moon Trek, LROC QuickMap, JPL Horizons documentation, and other references are recorded in [SOURCES.md](SOURCES.md). The overview diagrams are authored SVG artwork rather than NASA imagery.
+NASA LRO / LOLA global Moon model, USGS lunar feature records, NASA Moon Trek, LROC QuickMap, JPL Horizons documentation, and other sources are recorded in [SOURCES.md](SOURCES.md).
 
 ## Run locally
 
 Requirements: Node.js 20.9 or newer and npm 10 or newer.
 
-```bash
+\`\`\`bash
 npm ci
 npm run dev
-```
+\`\`\`
 
 Open http://localhost:3000.
 
@@ -75,4 +78,4 @@ The project uses Next.js App Router, React 19, JavaScript/JSX, TypeScript for re
 
 ## Project identity
 
-Built by a family, inspired by lunar exploration. LunaPath is an independent educational project created for the NASA Space Apps Challenge; it is not an official NASA product.
+Built by AI Family, inspired by lunar exploration.
