@@ -13,26 +13,11 @@ function BrandMark() {
     </svg>
   );
 }
-function PresentationIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <rect x="2.75" y="3.25" width="14.5" height="10.25" rx="1.5" />
-      <path d="M10 13.5v3.25m-3.5 0h7M7 7.25l2 2 4-3" />
-    </svg>
-  );
-}
-function ExplorerIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="8.75" cy="8.75" r="5.65" />
-      <path d="m13 13 4.1 4.1M11 6.5 9.25 10l-3.5 1.75L7.5 8.25 11 6.5Z" />
-    </svg>
-  );
-}
+
 export default function SiteHeader() {
   const pathname = usePathname();
-  const presentationActive = pathname.startsWith("/presentation");
   const explorerActive = pathname.startsWith("/explorer");
+
   return (
     <header className="site-header">
       <div className="site-nav">
@@ -43,19 +28,21 @@ export default function SiteHeader() {
         <nav className="nav-destinations" aria-label="Main navigation">
           <ul>
             <li>
-              <Link className={presentationActive ? "nav-link is-active" : "nav-link"}
-                href="/presentation" aria-current={presentationActive ? "page" : undefined}>
-                <PresentationIcon /><span>Presentation</span>
+              <Link className="nav-link" href="/#how-it-works">
+                <span>How it works</span>
               </Link>
             </li>
             <li>
-              <Link className={explorerActive ? "nav-link nav-link-primary is-active" : "nav-link nav-link-primary"}
-                href="/explorer" aria-current={explorerActive ? "page" : undefined}>
-                <ExplorerIcon /><span>Landing Explorer</span>
+              <Link className="nav-link" href="/#science">
+                <span>Science & sources</span>
               </Link>
             </li>
           </ul>
         </nav>
+        <Link className={explorerActive ? "nav-cta is-active" : "nav-cta"} href="/explorer">
+          <span>Open Navigator</span>
+          <b aria-hidden="true">↗</b>
+        </Link>
       </div>
     </header>
   );

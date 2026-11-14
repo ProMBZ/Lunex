@@ -1,145 +1,340 @@
-function PinIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10.1c0 5.1-7 10.4-7 10.4S5 15.2 5 10.1a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2.2" /></svg>;
+import Link from "next/link";
+import DemoWalkthrough from "./DemoWalkthrough";
+import { LUNAR_SITES } from "@/lib/mission-data";
+
+function formatCoordinate(value, axis) {
+  const direction = axis === "latitude"
+    ? value < 0 ? "S" : "N"
+    : value < 0 ? "W" : "E";
+  return Math.abs(value).toFixed(2) + "° " + direction;
 }
-function SunEarthIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="7" cy="8" r="3" /><path d="M7 1.5v1.2M7 13.3v1.2M.5 8h1.2m10.6 0h1.2M2.4 3.4l.9.9m7.4 7.4.9.9" /><circle cx="17.5" cy="17" r="4.2" /><path d="M14.4 14.3c1.7-1.1 3.4-1.4 5.2-.6m-6.1 4.1c1.4.9 3.2 1.3 5.4.7" /></svg>;
-}
-function CompareIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h6v14H4zM14 5h6v14h-6zM10 9h4m-4 6h4" /></svg>;
-}
-function LunarStoryArt() {
-  return (
-    <div className="overview-visual">
-      <div className="overview-visual-top"><span>THE LUNAR SOUTH POLE</span><span>PLACE / SUNLIGHT / EARTH</span></div>
-      <svg viewBox="0 0 760 480" role="img" aria-labelledby="overview-art-title overview-art-desc">
-        <title id="overview-art-title">Lunar mission scene</title>
-        <desc id="overview-art-desc">An illustrative lunar surface showing a Sun direction, Earth in the sky, an astronaut and a lunar lander.</desc>
-        <defs>
-          <radialGradient id="ov-earth" cx="35%" cy="28%" r="78%"><stop offset="0%" stopColor="#b7d8e8" /><stop offset="48%" stopColor="#5385a5" /><stop offset="100%" stopColor="#1c354c" /></radialGradient>
-          <linearGradient id="ov-ground" x1="0" y1="0" x2=".8" y2="1"><stop offset="0%" stopColor="#6f7782" stopOpacity=".38" /><stop offset="100%" stopColor="#1b2029" stopOpacity=".96" /></linearGradient>
-          <linearGradient id="ov-suit" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#eef1f4" /><stop offset="100%" stopColor="#788595" /></linearGradient>
-          <radialGradient id="ov-sun"><stop offset="0%" stopColor="#fff2c7" /><stop offset="100%" stopColor="#d6a66a" /></radialGradient>
-          <filter id="ov-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14" /></filter>
-          <clipPath id="ov-earth-clip"><circle cx="625" cy="102" r="43" /></clipPath>
-        </defs>
-        <g fill="#d9e4f0">
-          <circle cx="62" cy="62" r="1.2" opacity=".52" /><circle cx="174" cy="124" r="1" opacity=".4" /><circle cx="260" cy="52" r="1.1" opacity=".6" /><circle cx="365" cy="88" r="1.4" opacity=".35" /><circle cx="455" cy="44" r="1" opacity=".55" /><circle cx="711" cy="210" r="1.2" opacity=".38" /><circle cx="550" cy="188" r=".9" opacity=".45" /><circle cx="97" cy="220" r=".8" opacity=".5" /><circle cx="693" cy="34" r=".9" opacity=".65" />
-        </g>
-        <circle cx="98" cy="106" r="34" fill="#d7a96c" opacity=".12" filter="url(#ov-glow)" />
-        <circle cx="98" cy="106" r="18" fill="url(#ov-sun)" />
-        <g stroke="#d7a96c" opacity=".55" strokeWidth="1"><path d="M98 75V65M98 147v-10M67 106H57M139 106h-10M76 84l-7-7M127 135l-7-7M120 84l7-7M69 135l7-7" /></g>
-        <path d="M124 122Q235 158 329 285" fill="none" stroke="#d7a96c" strokeWidth="1.8" strokeDasharray="5 8" opacity=".8" />
-        <path d="M124 122Q235 158 329 285" fill="none" stroke="#d7a96c" strokeWidth="7" opacity=".08" />
-        <circle cx="625" cy="102" r="54" fill="#6b9cba" opacity=".13" filter="url(#ov-glow)" />
-        <circle cx="625" cy="102" r="43" fill="url(#ov-earth)" stroke="#9fc4d9" strokeOpacity=".7" />
-        <g clipPath="url(#ov-earth-clip)" fill="#a6c5b3" opacity=".72">
-          <path d="M588 77l18-8 9 8-3 9-10 3-4 12-11-4-6-11z" /><path d="M628 58l11 5 1 11 10 6-4 12-10-1-6-9-7-4z" /><path d="M638 105l13 1 5 10-9 7-2 13-13-2-5-12z" /><path d="M594 118l10-5 9 8-5 13-13-2z" />
-        </g>
-        <path d="M586 147Q475 184 369 291" fill="none" stroke="#86adcb" strokeWidth="1.7" strokeDasharray="4 8" opacity=".82" />
-        <path d="M0 346L84 329L132 337L188 304L245 325L296 298L354 321L412 286L469 318L532 298L592 327L659 306L760 336V480H0Z" fill="url(#ov-ground)" />
-        <path d="M0 346L84 329L132 337L188 304L245 325L296 298L354 321L412 286L469 318L532 298L592 327L659 306L760 336" fill="none" stroke="#a9b2bc" strokeOpacity=".55" strokeWidth="1.6" />
-        <path d="M0 389Q155 352 299 371T760 370M0 426Q155 394 299 409T760 414" stroke="#727e8a" strokeOpacity=".22" fill="none" />
-        <g transform="translate(434 284)">
-          <ellipse cx="0" cy="75" rx="44" ry="7" fill="#05070b" opacity=".52" />
-          <path d="M-23 6h46l9 42h-64z" fill="#737d8a" stroke="#c2cbd4" strokeOpacity=".65" /><path d="M-17 11h34v27h-34z" fill="#192634" stroke="#c4d1df" strokeOpacity=".6" />
-          <path d="M-26 49l-18 24M26 49l18 24M-44 73h12M44 73h-12" fill="none" stroke="#bbc5cf" strokeWidth="3" strokeLinecap="round" />
-          <path d="M-27 6l-13-13M27 6l13-13M-40-7h80M-40-7l-21-11M40-7l21-11" fill="none" stroke="#9ba9b8" strokeWidth="2" />
-          <rect x="-60" y="-25" width="17" height="17" rx="1" fill="#243a4d" stroke="#9ab0c5" /><path d="M-56-22v11m4-11v11m4-11v11" stroke="#90a9c0" strokeWidth=".8" />
-          <rect x="43" y="-25" width="17" height="17" rx="1" fill="#243a4d" stroke="#9ab0c5" /><path d="M47-22v11m4-11v11m4-11v11" stroke="#90a9c0" strokeWidth=".8" />
-        </g>
-        <g transform="translate(280 283)">
-          <ellipse cx="0" cy="72" rx="22" ry="5" fill="#05070b" opacity=".5" />
-          <path d="M-12 2Q-23 20-19 37l-7 24 10 2 13-28 8 0 12 28 10-2-7-24Q24 20 12 2Z" fill="url(#ov-suit)" stroke="#cbd3dd" strokeWidth="1.2" />
-          <rect x="-25" y="13" width="9" height="28" rx="3" fill="#7f8b99" stroke="#cbd3dd" strokeWidth="1" />
-          <path d="M-14 5Q-30 15-29 29l-12 11 7 7 19-15M14 5Q27 16 28 29l10 8-6 8-19-14" fill="none" stroke="#d9e0e7" strokeWidth="8" strokeLinecap="round" />
-          <circle cx="0" cy="-14" r="19" fill="url(#ov-suit)" stroke="#e6ebf0" strokeWidth="1.5" /><ellipse cx="1" cy="-14" rx="12.5" ry="13" fill="#162b40" stroke="#a9c1d4" strokeWidth="1.5" /><path d="M-7-20Q2-27 10-17" stroke="#d8e7f1" strokeOpacity=".5" strokeWidth="2" fill="none" />
-          <path d="M-10 34h20" stroke="#5c6875" strokeWidth="2" />
-        </g>
-        <g fill="#d8e4f0" fontFamily="monospace" fontSize="10" letterSpacing="1.5"><text x="35" y="52">SUNLIGHT</text><text x="568" y="40">EARTH VIEW</text><text x="268" y="405">LANDING SITE</text><text x="405" y="430">LUNAR SURFACE</text></g>
-        <g stroke="#7d8e9f" strokeOpacity=".45" strokeWidth="1"><path d="M100 60v18M613 49v14M310 389v-42M442 414v-24" /></g>
-      </svg>
-      <div className="overview-visual-foot"><span>SUNLIGHT / EARTH / SURFACE</span><span>THE QUESTIONS BEHIND A LANDING SITE</span></div>
-    </div>
-  );
-}
-const steps = [
+
+const sources = [
   {
     number: "01",
-    icon: <PinIcon />,
-    title: "Explore the lunar surface",
-    text: "Choose a south-polar location, inspect its coordinates and understand the surrounding lunar landscape in context.",
+    type: "IN THE PROTOTYPE",
+    title: "NASA LRO / LOLA global Moon model",
+    description:
+      "The interactive 3D Moon provides global colour and height context for orientation. It is not a local south-pole elevation model and cannot establish terrain clearance.",
+    link: "https://svs.gsfc.nasa.gov/14959/",
+    linkLabel: "NASA model source",
+    tone: "source-used",
   },
   {
     number: "02",
-    icon: <SunEarthIcon />,
-    title: "Follow the Sun and Earth",
-    text: "See why sunlight and a clear direction to Earth matter for power opportunities and mission communication.",
+    type: "IN THE PROTOTYPE",
+    title: "USGS Gazetteer of Planetary Nomenclature",
+    description:
+      "Named lunar reference features, their feature-centre coordinates and catalogue dimensions supply the locations used by the comparison interface.",
+    link: "https://planetarynames.wr.usgs.gov/",
+    linkLabel: "USGS lunar records",
+    tone: "source-used",
   },
   {
     number: "03",
-    icon: <CompareIcon />,
-    title: "Compare mission conditions",
-    text: "Move through observation times and compare candidate locations to understand how the mission picture changes.",
+    type: "REFERENCE TOOLS",
+    title: "NASA Moon Trek & LROC QuickMap",
+    description:
+      "These external tools provide lunar imagery, map layers and terrain-inspection context. They are reference resources, not live map layers embedded in this prototype.",
+    link: "https://trek.nasa.gov/moon/",
+    linkLabel: "Open Moon Trek",
+    secondaryLink: "https://quickmap.lroc.asu.edu/",
+    secondaryLabel: "Open LROC QuickMap",
+    tone: "source-reference",
+  },
+  {
+    number: "04",
+    type: "REQUIRED FOR NEXT STAGE",
+    title: "JPL Horizons / NAIF SPICE",
+    description:
+      "Observer-specific Sun and Earth direction over time requires validated ephemerides, reference frames, a defined observer and a documented time standard. This integration is not connected yet.",
+    link: "https://ssd.jpl.nasa.gov/horizons/",
+    linkLabel: "JPL Horizons",
+    secondaryLink: "https://naif.jpl.nasa.gov/naif/",
+    secondaryLabel: "NAIF SPICE",
+    tone: "source-planned",
+  },
+  {
+    number: "05",
+    type: "REQUIRED FOR NEXT STAGE",
+    title: "Regional LOLA elevation data",
+    description:
+      "A region-matched digital elevation model and a local skyline solver are needed to determine whether the Sun or Earth clears nearby terrain from a specific observer point.",
+    link: "https://ode.rsl.wustl.edu/moon/",
+    linkLabel: "Lunar Orbiter Data Explorer",
+    tone: "source-planned",
+  },
+];
+
+function SiteGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 3.5v17M3.5 12h17M7 7l10 10M17 7 7 17" />
+      <circle cx="12" cy="12" r="2.2" />
+    </svg>
+  );
+}
+
+function TimeGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7v5l3.5 2" />
+      <path d="M12 1.5v2M22.5 12h-2" />
+    </svg>
+  );
+}
+
+function CompareGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.5" y="5" width="7" height="14" rx="1" />
+      <rect x="13.5" y="5" width="7" height="14" rx="1" />
+      <path d="M10.5 9h3M10.5 15h3" />
+    </svg>
+  );
+}
+
+const workflow = [
+  {
+    number: "01",
+    icon: <SiteGlyph />,
+    title: "Choose a lunar site",
+    description:
+      "Start with a named south-polar reference feature or enter your own latitude and longitude. The listed feature centre is a reference coordinate, not a surveyed landing point.",
+    detail: "USGS FEATURE RECORDS + CUSTOM COORDINATES",
+  },
+  {
+    number: "02",
+    icon: <TimeGlyph />,
+    title: "Select a date and time",
+    description:
+      "Set an observation date and UTC hour. These inputs define the scenario you want to examine; they do not yet trigger live Sun or Earth ephemeris calculations.",
+    detail: "DATE INPUT + 24-HOUR UTC CONTROL",
+  },
+  {
+    number: "03",
+    icon: <CompareGlyph />,
+    title: "Compare the conditions",
+    description:
+      "Compare two locations or two dates, inspect their coordinates and see which scientific outputs still need validated ephemeris and local terrain data.",
+    detail: "SITE / DATE COMPARISON · NO SUITABILITY SCORE",
   },
 ];
 
 export default function ProjectOverview() {
   return (
-    <section className="project-overview" id="project-overview" aria-labelledby="project-overview-title">
-      <div className="overview-shell">
-        <div className="overview-story">
-          <div className="overview-intro">
-            <p className="overview-eyebrow"><span /> PROJECT OVERVIEW</p>
-            <h2 id="project-overview-title">
-              Choosing where to land
-              <br />
-              is only half the <em>challenge.</em>
-            </h2>
-            <p className="overview-lede">
-              At the Moon’s south pole, sunlight can skim the horizon and
-              nearby ridges can change what a landing site can see. LunaPath
-              brings location, lunar terrain, the Sun and Earth into one
-              exploration experience, helping you understand the conditions
-              around a potential landing site.
+    <div className="project-overview">
+      <DemoWalkthrough />
+
+      <section className="story-section how-section" id="how-it-works" aria-labelledby="how-title">
+        <div className="section-shell">
+          <div className="section-heading" data-reveal="up">
+            <div>
+              <span className="section-kicker">01 / HOW IT WORKS</span>
+              <h2 id="how-title">A clear route from<br /><em>place to comparison.</em></h2>
+            </div>
+            <p>
+              LunaPath turns three simple inputs into a structured mission
+              scenario: a location, an observation time and a comparison.
             </p>
           </div>
-          <LunarStoryArt />
-        </div>
-
-        <div className="overview-journey">
-          <div className="overview-journey-heading">
-            <div>
-              <span className="overview-journey-kicker">HOW LUNAPATH WORKS</span>
-              <h3>One place. Three things to understand.</h3>
-            </div>
-            <span className="overview-journey-index">01 — 03</span>
-          </div>
-          <div className="overview-steps">
-            {steps.map((step) => (
-              <article className="overview-step" key={step.number}>
-                <div className="overview-step-top">
-                  <span className="overview-step-number">{step.number}</span>
-                  <span className="overview-step-icon">{step.icon}</span>
+          <div className="workflow-grid">
+            {workflow.map((item) => (
+              <article className="workflow-card" key={item.number} data-reveal="up">
+                <div className="workflow-card-top">
+                  <span className="workflow-number">{item.number}</span>
+                  <span className="workflow-icon">{item.icon}</span>
                 </div>
-                <h4>{step.title}</h4>
-                <p>{step.text}</p>
-                <span className="overview-step-link" aria-hidden="true">LUNAPATH / {step.number}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <span className="workflow-detail">{item.detail}</span>
+              </article>
+            ))}
+          </div>
+          <div className="section-action-row">
+            <span>TRY THE ACTUAL CONTROLS</span>
+            <Link href="/explorer" className="text-link">Open the Lunar Navigator <b>↗</b></Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="story-section evidence-section" id="results" aria-labelledby="results-title">
+        <div className="section-shell">
+          <div className="section-heading" data-reveal="up">
+            <div>
+              <span className="section-kicker">02 / REFERENCE POINTS</span>
+              <h2 id="results-title">Real lunar locations.<br /><em>Traceable coordinates.</em></h2>
+            </div>
+            <p>
+              These are catalogue records used by the prototype, not invented
+              scores or landing recommendations. Each position links to its
+              original USGS feature record.
+            </p>
+          </div>
+          <div className="reference-grid">
+            {LUNAR_SITES.map((site, index) => (
+              <article className="reference-card" key={site.id} data-reveal="up">
+                <div className="reference-card-top">
+                  <span>REFERENCE FEATURE / 0{index + 1}</span>
+                  <span className="reference-dot" aria-hidden="true" />
+                </div>
+                <h3>{site.name}</h3>
+                <p className="reference-region">{site.featureType} · {site.region}</p>
+                <div className="coordinate-pair">
+                  <div>
+                    <span>LATITUDE</span>
+                    <b>{formatCoordinate(site.latitude, "latitude")}</b>
+                  </div>
+                  <div>
+                    <span>LONGITUDE</span>
+                    <b>{formatCoordinate(site.longitude, "longitude")}</b>
+                  </div>
+                </div>
+                <div className="reference-dimension">
+                  <span>{site.featureType === "Mountain" ? "LISTED SPAN" : "LISTED DIAMETER"}</span>
+                  <b>{site.diameterKm.toFixed(2)} km</b>
+                </div>
+                <a href={site.sourceUrl} target="_blank" rel="noreferrer" className="reference-source">
+                  {site.usgsId} <span>↗</span>
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="evidence-caveat">
+            Catalogue centres and dimensions describe named features. They do
+            not establish a safe landing zone, local slope, illumination
+            duration or communications availability.
+          </p>
+        </div>
+      </section>
+
+      <section className="story-section science-section" id="science" aria-labelledby="science-title">
+        <div className="section-shell">
+          <div className="section-heading" data-reveal="up">
+            <div>
+              <span className="section-kicker">03 / SCIENCE & SOURCES</span>
+              <h2 id="science-title">Every result needs<br /><em>a source and a method.</em></h2>
+            </div>
+            <p>
+              We distinguish data already represented in the prototype from
+              the sources and calculations still needed for scientific
+              visibility windows.
+            </p>
+          </div>
+
+          <div className="method-flow" data-reveal="up">
+            <div className="method-node">
+              <span>INPUT 01</span>
+              <b>Observer coordinates</b>
+              <small>USGS feature record or user-defined point</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div className="method-node">
+              <span>INPUT 02</span>
+              <b>Ephemeris</b>
+              <small>Sun and Earth direction at the selected UTC time</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div className="method-node">
+              <span>INPUT 03</span>
+              <b>Local terrain</b>
+              <small>Elevation model and observer horizon profile</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div className="method-node method-node-output">
+              <span>OUTPUT</span>
+              <b>Visibility windows</b>
+              <small>Geometric visibility, with provenance and uncertainty</small>
+            </div>
+          </div>
+
+          <div className="source-grid">
+            {sources.map((source) => (
+              <article className={"source-card " + source.tone} key={source.number} data-reveal="up">
+                <div className="source-card-top">
+                  <span>{source.number} / {source.type}</span>
+                  <i aria-hidden="true" />
+                </div>
+                <h3>{source.title}</h3>
+                <p>{source.description}</p>
+                <div className="source-card-links">
+                  <a href={source.link} target="_blank" rel="noreferrer">{source.linkLabel} <b>↗</b></a>
+                  {source.secondaryLink && (
+                    <a href={source.secondaryLink} target="_blank" rel="noreferrer">{source.secondaryLabel} <b>↗</b></a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
         </div>
+      </section>
 
-        <div className="overview-resource-row">
-          <span>SCIENCE & DATA RESOURCES</span>
-          <a href="https://svs.gsfc.nasa.gov/14959/" target="_blank" rel="noreferrer">NASA LRO / LOLA <span>↗</span></a>
-          <i />
-          <a href="https://planetarynames.wr.usgs.gov/" target="_blank" rel="noreferrer">USGS lunar features <span>↗</span></a>
-          <i />
-          <a href="https://quickmap.lroc.asu.edu/" target="_blank" rel="noreferrer">LROC QuickMap <span>↗</span></a>
-          <i />
-          <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noreferrer">JPL Horizons <span>↗</span></a>
+      <section className="story-section transparency-section" id="transparency" aria-labelledby="transparency-title">
+        <div className="section-shell">
+          <div className="section-heading" data-reveal="up">
+            <div>
+              <span className="section-kicker">04 / PROJECT TRANSPARENCY</span>
+              <h2 id="transparency-title">Show what works.<br /><em>Label what does not.</em></h2>
+            </div>
+            <p>
+              A scientific interface should make its assumptions visible.
+              LunaPath keeps prototype controls separate from calculated
+              results and engineering claims.
+            </p>
+          </div>
+
+          <div className="transparency-grid">
+            <article className="transparency-card" data-reveal="up">
+              <span className="transparency-label status-working">WORKING IN PROTOTYPE</span>
+              <h3>What you can do today</h3>
+              <ul>
+                <li>Select named lunar reference features.</li>
+                <li>Enter and validate custom coordinates.</li>
+                <li>Choose an observation date and UTC hour.</li>
+                <li>Compare site or date scenarios.</li>
+                <li>Inspect the global Moon model for orientation.</li>
+              </ul>
+            </article>
+            <article className="transparency-card" data-reveal="up">
+              <span className="transparency-label status-pending">NOT YET CALCULATED</span>
+              <h3>What still needs science</h3>
+              <ul>
+                <li>Observer-specific Sun and Earth ephemerides.</li>
+                <li>Terrain-aware local horizon clearance.</li>
+                <li>Actual illumination and visibility windows.</li>
+                <li>Solar-array energy and battery modelling.</li>
+                <li>RF link budgets and communication margins.</li>
+              </ul>
+            </article>
+            <article className="transparency-card" data-reveal="up">
+              <span className="transparency-label status-open">OPEN & DISCLOSED</span>
+              <h3>Code, licence and AI use</h3>
+              <p>
+                The project source is public under Apache-2.0. AI-assisted
+                implementation and the human review boundary are documented
+                in the repository.
+              </p>
+              <div className="transparency-links">
+                <a href="https://github.com/ProMBZ/LunaPath" target="_blank" rel="noreferrer">GitHub repository ↗</a>
+                <a href="https://github.com/ProMBZ/LunaPath/blob/main/LICENSE" target="_blank" rel="noreferrer">Apache-2.0 licence ↗</a>
+                <a href="https://github.com/ProMBZ/LunaPath/blob/main/AI_USAGE.md" target="_blank" rel="noreferrer">AI-use disclosure ↗</a>
+                <a href="https://github.com/ProMBZ/LunaPath/blob/main/SOURCES.md" target="_blank" rel="noreferrer">Complete source register ↗</a>
+              </div>
+            </article>
+          </div>
+
+          <div className="independence-note" data-reveal="up">
+            <span className="independence-mark" aria-hidden="true">L</span>
+            <p>
+              <b>Built by a family, inspired by lunar exploration.</b>
+              <span>LunaPath is an independent educational project created for the 2026 NASA Space Apps Challenge, not an official NASA product.</span>
+            </p>
+            <Link href="/explorer" className="text-link">Explore the prototype <b>↗</b></Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

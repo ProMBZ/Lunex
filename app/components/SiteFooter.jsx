@@ -25,39 +25,49 @@ export default function SiteFooter() {
           <div className="footer-identity">
             <Wordmark />
             <p>
-              Helping people explore lunar landing locations and understand
-              how sunlight, Earth visibility, terrain and time shape mission
-              planning.
+              A visual navigator for exploring lunar south-pole reference
+              sites, observation times and the science behind mission
+              conditions.
             </p>
             <span className="footer-family-line">
               Built by a family, inspired by lunar exploration.
             </span>
+            <span className="footer-independent-note">
+              An independent educational project created for NASA Space Apps
+              Challenge 2026. Not an official NASA product.
+            </span>
           </div>
+
           <nav className="footer-column" aria-label="Project navigation">
             <h2>EXPLORE</h2>
-            <Link href="/">Project information <span>↗</span></Link>
-            <Link href="/explorer">Landing Explorer <span>↗</span></Link>
-            <Link href="/presentation">Presentation <span>↗</span></Link>
+            <Link href="/explorer">Open Navigator <span>↗</span></Link>
+            <Link href="/#how-it-works">How it works <span>↗</span></Link>
+            <Link href="/#science">Science & sources <span>↗</span></Link>
+            <Link href="/presentation">Project presentation <span>↗</span></Link>
           </nav>
-          <nav className="footer-column" aria-label="Lunar data and reference resources">
-            <h2>DATA & REFERENCES</h2>
-            <a href="https://svs.gsfc.nasa.gov/14959/" target="_blank" rel="noreferrer">NASA LRO / LOLA Moon model <span>↗</span></a>
-            <a href="https://trek.nasa.gov/moon/" target="_blank" rel="noreferrer">NASA Moon Trek <span>↗</span></a>
-            <a href="https://quickmap.lroc.asu.edu/" target="_blank" rel="noreferrer">LROC QuickMap <span>↗</span></a>
-            <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noreferrer">JPL Horizons <span>↗</span></a>
+
+          <nav className="footer-column" aria-label="Project transparency">
+            <h2>PROJECT FILES</h2>
+            <a href="https://github.com/ProMBZ/LunaPath" target="_blank" rel="noreferrer">GitHub repository <span>↗</span></a>
+            <a href="https://github.com/ProMBZ/LunaPath/blob/main/SOURCES.md" target="_blank" rel="noreferrer">Sources register <span>↗</span></a>
+            <a href="https://github.com/ProMBZ/LunaPath/blob/main/AI_USAGE.md" target="_blank" rel="noreferrer">AI-use disclosure <span>↗</span></a>
+            <a href="https://github.com/ProMBZ/LunaPath/blob/main/LICENSE" target="_blank" rel="noreferrer">Apache-2.0 licence <span>↗</span></a>
           </nav>
+
           <div className="footer-side">
             <div className="footer-source-note">
-              <span>PROJECT / 2026</span>
-              <p>Lunar Landing Site Navigator · NASA Space Apps Challenge</p>
+              <span>NASA SPACE APPS / 2026</span>
+              <p>Lunar Landing Site Navigator</p>
+              <p>Prototype status and scientific limits are documented publicly.</p>
             </div>
             <BackToTopButton />
           </div>
         </div>
+
         <div className="footer-bottom">
           <span>© 2026 LUNAPATH</span>
-          <span>NASA SPACE APPS CHALLENGE · LUNAR LANDING SITE NAVIGATOR</span>
-          <a href="https://github.com/ProMBZ/Potato" target="_blank" rel="noreferrer">Source repository <span>↗</span></a>
+          <span>BUILT BY A FAMILY · INSPIRED BY LUNAR EXPLORATION</span>
+          <a href="https://github.com/ProMBZ/LunaPath" target="_blank" rel="noreferrer">Source repository <span>↗</span></a>
         </div>
       </div>
     </footer>

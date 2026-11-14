@@ -3,6 +3,7 @@ import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import Starfield from "./components/Starfield";
 import CustomCursor from "./components/CustomCursor";
+import RevealObserver from "./components/RevealObserver";
 
 export const metadata = {
   title: {
@@ -10,7 +11,7 @@ export const metadata = {
     template: "%s | LunaPath",
   },
   description:
-    "Explore lunar landing locations and understand how sunlight, Earth visibility, terrain and time shape mission planning.",
+    "Explore lunar south-pole reference sites, choose an observation date, and understand how terrain, sunlight, Earth visibility and time shape mission planning.",
   applicationName: "LunaPath",
   icons: { icon: "/favicon.svg" },
   keywords: [
@@ -18,11 +19,12 @@ export const metadata = {
     "Lunar Landing Site Navigator",
     "NASA Space Apps Challenge 2026",
     "lunar south pole",
+    "lunar landing site comparison",
   ],
   openGraph: {
     title: "LunaPath — Lunar Landing Site Navigator",
     description:
-      "Understand how place and time change the view of the Sun and Earth from the Moon.",
+      "Explore lunar south-pole reference sites and the science behind sunlight, Earth visibility, terrain and time.",
     type: "website",
     siteName: "LunaPath",
   },
@@ -41,6 +43,7 @@ export default function RootLayout({ children }) {
       <body>
         <Starfield />
         <CustomCursor />
+        <RevealObserver />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>

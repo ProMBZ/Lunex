@@ -21,40 +21,66 @@ export default function Starfield() {
         return (seed - 1) / 2147483646;
       };
     };
+
     const makeStars = () => {
       const random = randomSource(481516);
-      const count = window.innerWidth < 680 ? 92 : 176;
+      const count = window.innerWidth < 680 ? 112 : 224;
       stars = Array.from({ length: count }, () => {
         const layer = random();
+        const bright = random() > 0.975;
         return {
           x: random() * width,
           y: random() * height,
-          radius: 0.35 + random() * (layer > 0.82 ? 1.05 : 0.55),
-          alpha: 0.2 + random() * 0.52,
-          depth: 0.15 + layer * 0.85,
+          radius: bright ? 0.95 + random() * 0.9 : 0.28 + random() * 0.66,
+          alpha: bright ? 0.46 + random() * 0.34 : 0.15 + random() * 0.47,
+          depth: 0.12 + layer * 0.88,
           phase: random() * Math.PI * 2,
-          twinkle: 0.35 + random() * 0.9,
+          twinkle: 0.22 + random() * 0.72,
+          bright,
+          cool: random() > 0.8,
         };
       });
     };
+
     const draw = (time) => {
       context.clearRect(0, 0, width, height);
       for (const star of stars) {
-        const parallaxX = (mouseX - 0.5) * star.depth * 12;
-        const parallaxY = (mouseY - 0.5) * star.depth * 9;
+        const parallaxX = (mouseX - 0.5) * star.depth * 15;
+        const parallaxY = (mouseY - 0.5) * star.depth * 11;
         const shimmer = motionQuery.matches ? 0 :
-          Math.sin(time * 0.001 * star.twinkle + star.phase) * 0.13;
-        const opacity = Math.max(0.08, Math.min(0.88, star.alpha + shimmer));
+          Math.sin(time * 0.001 * star.twinkle + star.phase) * (star.bright ? 0.17 : 0.1);
+        const opacity = Math.max(0.06, Math.min(0.9, star.alpha + shimmer));
+        const x = star.x - parallaxX;
+        const y = star.y - parallaxY;
         context.beginPath();
-        context.arc(star.x - parallaxX, star.y - parallaxY, star.radius, 0, Math.PI * 2);
-        context.fillStyle = "rgba(218, 229, 242, " + opacity + ")";
-        context.fill();
+        context.arc(x, y, star.radius, 0, Math.PI * 2);
+        context.fillStyle = star.cool
+          ? "rgba(183, 210, 239, " + opacity + ")"
+          : "rgba(226, 234, 244, " + opacity + ")";
+        if (star.bright) {
+          context.save();
+          context.shadowColor = "rgba(176, 207, 241, " + (opacity * 0.5) + ")";
+          context.shadowBlur = 7;
+          context.fill();
+          context.restore();
+          context.beginPath();
+          context.moveTo(x - 3.5, y);
+          context.lineTo(x + 3.5, y);
+          context.moveTo(x, y - 3.5);
+          context.lineTo(x, y + 3.5);
+          context.strokeStyle = "rgba(206, 223, 242, " + (opacity * 0.42) + ")";
+          context.lineWidth = 0.55;
+          context.stroke();
+        } else {
+          context.fill();
+        }
       }
     };
+
     const resize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 1.35);
       canvas.width = Math.round(width * pixelRatio);
       canvas.height = Math.round(height * pixelRatio);
       canvas.style.width = width + "px";
@@ -63,6 +89,7 @@ export default function Starfield() {
       makeStars();
       draw(0);
     };
+
     const animate = (time) => {
       if (!running) return;
       frame = window.requestAnimationFrame(animate);
@@ -70,6 +97,7 @@ export default function Starfield() {
       lastFrame = time;
       draw(time);
     };
+
     const start = () => {
       if (running || motionQuery.matches || document.visibilityState === "hidden") return;
       running = true;
@@ -79,6 +107,7 @@ export default function Starfield() {
       running = false;
       window.cancelAnimationFrame(frame);
     };
+
     const onPointerMove = (event) => {
       if (event.pointerType !== "mouse") return;
       mouseX = event.clientX / Math.max(width, 1);
