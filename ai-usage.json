@@ -24,7 +24,13 @@
     "Refined placeholder-page layouts for Landing Explorer and Presentation",
     "Footer navigation and resource attribution with working return-to-top control",
     "Accessible custom cursor halo and active navigation refinement",
-    "Local shadcn-compatible button primitive without a new runtime dependency"
+    "Local shadcn-compatible button primitive without a new runtime dependency",
+    "30-second interactive walkthrough with manual chapter controls and timed playback",
+    "Landing-page workflow, evidence, source/methodology and project-transparency sections",
+    "Public Mission Explorer route activation using existing map, coordinate and scenario components",
+    "Refined starfield with restrained bright stars, pointer parallax and reduced-motion handling",
+    "Scroll-reveal integration using IntersectionObserver",
+    "Scientific data-source status labels and explicit distinction between used, reference and planned sources"
   ],
   "human_contribution": [
     "problem definition and product direction",
@@ -39,12 +45,12 @@
     "clean_dependency_install": "npm ci passed on a clean GitHub Actions runner on 2026-11-13",
     "production_build": "npm run build passed on a clean GitHub Actions runner on 2026-11-13",
     "build_warnings": "A non-fatal Next.js tracing warning was emitted for dynamic filesystem lookup in app/api/moon-model/route.js.",
-    "cross_browser_and_device_testing": "Pending after the latest refinement; GitHub Actions validates installation, TypeScript and production build only.",
-    "manual_route_and_accessibility_testing": "Pending after the 13 November 2026 Project Overview, footer, placeholder-page and cursor refinements; keyboard, touch, reduced-motion and browser appearance still require manual verification.",
+    "cross_browser_and_device_testing": "Pending after 14 November 2026 landing-page and explorer-route refinement; keyboard, touch, reduced-motion, local GLB rendering and responsive browser appearance still require manual verification.",
+    "manual_route_and_accessibility_testing": "Pending after 14 November 2026 landing-page and explorer-route refinement; manually test /, /explorer, /presentation, keyboard navigation, touch controls and reveal behavior.",
     "scientific_validation": "pending; no validated lunar ephemeris or terrain-horizon backend is connected",
     "note": "A successful production build does not prove browser compatibility, complete human audit, error-free runtime behavior or scientific validity."
   },
   "generated_media": "No AI-generated photographs, images or videos are intentionally included.",
   "scientific_data": "The website must not present simulated or uncomputed values as validated measurements.",
-  "note": "Latest change adds an authored SVG project illustration, project overview, resource footer, accessible scroll-to-top button, desktop mouse halo and refined destination routes. It does not connect ephemeris, local DEM horizon, power or RF calculations."
+  "note": "Landing page and explorer were refined on 14 November 2026. The public explorer is a demonstrator with functional location/date/scenario inputs; ephemeris, terrain-horizon, power and RF outputs remain uncomputed. The landing walkthrough is an interactive guide, not a video recording."
 }

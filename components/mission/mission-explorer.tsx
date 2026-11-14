@@ -9,6 +9,12 @@ import { CONDITION_STATES, LUNAR_SITES, isSouthPolarCoordinate, type LunarSite }
 
 type CompareMode = "site" | "date";
 
+function defaultObservationDate(offsetDays = 0) {
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() + offsetDays);
+  return date.toISOString().slice(0, 10);
+}
+
 function coord(value: number, axis: "lat" | "lon") {
   return Math.abs(value).toFixed(2) + "° " + (axis === "lat" ? (value < 0 ? "S" : "N") : (value < 0 ? "W" : "E"));
 }
@@ -19,8 +25,8 @@ export default function MissionExplorer() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [customApplied, setCustomApplied] = useState(false);
-  const [date, setDate] = useState("2026-11-13");
-  const [compareDate, setCompareDate] = useState("2026-11-20");
+  const [date, setDate] = useState(() => defaultObservationDate(0));
+  const [compareDate, setCompareDate] = useState(() => defaultObservationDate(7));
   const [hour, setHour] = useState(12);
   const [playing, setPlaying] = useState(false);
   const [compareMode, setCompareMode] = useState<CompareMode>("site");
@@ -276,7 +282,7 @@ export default function MissionExplorer() {
 
       <section className="explorer-next wrap">
         <div><span className="section-index">NEXT / UNDERSTAND THE METHOD</span><h2>Evidence before<br /><em>conclusions.</em></h2></div>
-        <div><p>Read how celestial positions, local terrain and geometric visibility need to be combined, and where power and RF analysis begin.</p><Link className="button button-primary" href="/methodology">Open methodology <span>↗</span></Link></div>
+        <div><p>Read how celestial positions, local terrain and geometric visibility need to be combined, and where power and RF analysis begin.</p><Link className="button button-primary" href="/#science">Read the science <span>↗</span></Link></div>
       </section>
     </main>
   );

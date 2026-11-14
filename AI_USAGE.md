@@ -72,3 +72,12 @@ The Project Overview was reorganized into a two-column introductory story and on
 The footer hierarchy was tightened, its back-to-top control remains a real button, and repeated family attribution was removed from the lower footer line. The custom cursor remains a decorative, pointer-events-none halo for mouse input only.
 
 The site no longer mounts React \`ViewTransition\` around the live Moon portal or the page-transition wrapper. This avoids interrupted browser view transitions when a tab becomes hidden. The MoonScene, GLB loader, OrbitControls and navigation remain in place.
+
+
+## Landing-page and navigator refinement — 14 November 2026
+
+The new LunaPath repository now contains the full application source. The landing page was refined around the user-requested flow: a direct navigator call to action, a 30-second interactive walkthrough, three workflow cards, traceable USGS reference locations, a source/methodology section, and project transparency. The walkthrough is an interactive UI guide rather than a video recording; it uses real catalogue coordinates and marks scientific outputs as not calculated.
+
+The public `/explorer` route now renders the existing mission-explorer demonstrator rather than a Coming Soon placeholder. It supports named USGS reference-feature selection, custom coordinate input, date and UTC-hour selection, map / global-Moon views, scenario comparisons and an illustrative timeline. It does not calculate observer-specific ephemerides, terrain-aware illumination, Earth-visibility windows, electrical power or an RF link budget.
+
+The starfield was refined with varied star sizes, a small number of restrained glints, pointer parallax, reduced-motion support and visibility-aware animation. Section reveals are enabled through the existing IntersectionObserver component. No external photographs, stock images, generated media, new runtime packages or new font services were added. The actual NASA GLB remains a local, uncommitted asset. Manual browser/device testing and local GLB verification remain necessary.

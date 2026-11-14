@@ -5,8 +5,10 @@ LunaPath is a family-built project for the 2026 NASA Space Apps Challenge: **Lun
 ## Website
 
 - `/` — project landing page, interactive NASA global Moon model, guided workflow, prototype evidence, sources, and project transparency.
-- `/explorer` — interactive demonstrator for selecting USGS lunar reference features or custom coordinates, choosing an observation date and UTC hour, and comparing scenarios.
+- `/explorer` — interactive mission navigator for selecting USGS lunar reference features or custom coordinates, choosing an observation date and UTC hour, and comparing scenarios.
 - The explorer's timeline and condition diagrams are explicitly illustrative. They do not represent live ephemerides or validated terrain-horizon results.
+
+The landing page includes a guided 30-second interactive walkthrough, traceable reference-site cards, source/methodology explanations, and a project-transparency section.
 
 ## What the prototype includes
 
@@ -30,6 +32,10 @@ The current demonstrator does **not** calculate or claim:
 - Landing safety or site-suitability rankings.
 
 Those outputs require validated ephemerides and reference frames, local elevation data, a terrain skyline solver, time-window extraction, uncertainty handling, and separate power and radio engineering models. Geometric Earth visibility is not a radio link budget. Solar visibility is not delivered electrical power.
+
+## Data interpretation
+
+The three named feature coordinates displayed on the landing page come from USGS catalogue records. They are reference feature centres (or a listed feature span for Mons Malapert), not surveyed landing coordinates or a suitability assessment. The 30-second walkthrough is an interactive UI guide, not a recording of computed science outputs.
 
 ## NASA Moon model
 
