@@ -250,6 +250,45 @@ export default function ProjectOverview() {
             </div>
           </div>
 
+          <div className="result-definition-grid" aria-label="What each scientific output represents">
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>01 / SUN GEOMETRY</span><b>NOT CALCULATED</b></div>
+              <h3>Solar azimuth & elevation</h3>
+              <p>The Sun's direction and angle above or below the observer's local horizontal plane. A positive elevation alone does not prove the Sun clears nearby terrain.</p>
+              <small>NEEDS EPHEMERIS + LOCAL HORIZON</small>
+            </article>
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>02 / EARTH GEOMETRY</span><b>NOT CALCULATED</b></div>
+              <h3>Earth elevation & visibility</h3>
+              <p>The apparent direction of Earth from the selected observer. Geometric visibility only means a clear line of sight in the model, not a working radio link.</p>
+              <small>NEEDS EPHEMERIS + LOCAL HORIZON</small>
+            </article>
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>03 / TERRAIN</span><b>NOT CALCULATED</b></div>
+              <h3>Local horizon clearance</h3>
+              <p>Compares the Sun or Earth direction with the skyline formed by nearby terrain around a defined observer point and height.</p>
+              <small>NEEDS REGIONAL DEM + SKYLINE SOLVER</small>
+            </article>
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>04 / TIME</span><b>NOT CALCULATED</b></div>
+              <h3>Visibility windows</h3>
+              <p>UTC intervals when a target remains above the required geometric or terrain-aware horizon threshold, including the chosen sampling and uncertainty.</p>
+              <small>NEEDS TIME SAMPLING + VALIDATED GEOMETRY</small>
+            </article>
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>05 / POWER</span><b>NOT CALCULATED</b></div>
+              <h3>Solar energy context</h3>
+              <p>Potential panel energy requires irradiance, incidence angle, array orientation, efficiency, temperature, shadowing and the system's electrical assumptions.</p>
+              <small>NEEDS SOLAR-ARRAY + ENERGY MODEL</small>
+            </article>
+            <article className="result-definition-card" data-reveal="up">
+              <div><span>06 / COMMUNICATION</span><b>NOT CALCULATED</b></div>
+              <h3>Direct-to-Earth link</h3>
+              <p>A usable link also depends on frequency, antenna gains, transmit power, pointing, losses and required margin. Earth visibility by itself is not enough.</p>
+              <small>NEEDS RF LINK BUDGET</small>
+            </article>
+          </div>
+
           <div className="source-grid">
             {sources.map((source) => (
               <article className={"source-card " + source.tone} key={source.number} data-reveal="up">
