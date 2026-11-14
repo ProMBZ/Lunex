@@ -62,7 +62,7 @@ export async function GET(request) {
       size: model?.size ?? null,
       sizeMB: model ? Number((model.size / 1024 / 1024).toFixed(1)) : null,
       expectedPath: 'public/models/Moon_NASA_LRO_8k_Topo_Small.glb',
-      configuredPath: configuredValue ? 'configured' : null,
+      configuredPath: (process.env.LUNEX_MOON_MODEL || process.env.LUNAPATH_MOON_MODEL) ? 'configured' : null,
       source: 'NASA Goddard Space Flight Center / LRO / LOLA'
     });
   }
