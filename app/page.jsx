@@ -3,7 +3,7 @@ import MoonPortal from "@/components/mission/moon-portal";
 import ProjectOverview from "./components/ProjectOverview";
 
 export const metadata = {
-  title: "LunaPath — Explore the Moon",
+  title: "Lunex — Explore the Moon",
   description:
     "Explore lunar south-polar locations, choose an observation time, and compare the questions that shape a lunar landing mission.",
 };
@@ -13,7 +13,7 @@ export default function HomePage() {
     <main id="main-content" className="home-page">
       <section className="hero-main" aria-labelledby="hero-title">
         <div className="hero-layout">
-          <div className="hero-copy">
+          <div className="hero-copy" data-reveal="left">
             <p className="hero-eyebrow">
               <span className="eyebrow-mark" aria-hidden="true" />
               LUNAR LANDING SITE NAVIGATOR
@@ -24,7 +24,7 @@ export default function HomePage() {
               <span>Think beyond the landing.</span>
             </h1>
             <p className="hero-description">
-              LunaPath helps you explore places near the Moon’s south pole.
+              Lunex helps you explore places near the Moon’s south pole.
               Look around the Moon in 3D, choose a place and a time, and compare
               the details that matter when planning a mission.
             </p>
@@ -40,7 +40,7 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="hero-proofline" aria-label="What LunaPath brings together">
+            <div className="hero-proofline" aria-label="What Lunex brings together">
               <span>MOON IN 3D</span>
               <i aria-hidden="true" />
               <span>PLACE & TIME</span>
@@ -52,7 +52,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="moon-column" aria-label="Interactive three-dimensional Moon model">
+          <div className="moon-column" data-reveal="scale" aria-label="Interactive three-dimensional Moon model">
             <div className="moon-aura" aria-hidden="true" />
             <div className="moon-orbit moon-orbit-one" aria-hidden="true" />
             <div className="moon-orbit moon-orbit-two" aria-hidden="true" />
@@ -68,7 +68,7 @@ export default function HomePage() {
         </div>
 
         <a className="hero-scroll-cue" href="#project-overview">
-          <span>DISCOVER LUNAPATH</span>
+          <span>DISCOVER LUNEX</span>
           <i aria-hidden="true" />
         </a>
       </section>

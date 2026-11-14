@@ -1,5 +1,5 @@
 {
-  "project": "LunaPath",
+  "project": "Lunex",
   "challenge": "Lunar Landing Site Navigator",
   "ai_tools": [
     {
@@ -34,7 +34,11 @@
     "Plain-language definitions for solar geometry, Earth geometry, terrain clearance, visibility windows, solar energy and direct-to-Earth link outputs",
     "Accessibility correction for guided walkthrough chapter controls",
     "Hydration-safe dynamic UTC date defaults for the Mission Explorer",
-    "USGS feature-record verification and correction of Mons Malapert's listed diameter label"
+    "USGS feature-record verification and correction of Mons Malapert's listed diameter label",
+    "Original animated SVG lunar mission-context overview graphic",
+    "Expanded animated starfield with accessible reduced-motion support",
+    "Responsive custom pointer halo for fine-pointer devices",
+    "Lunex product naming and footer refinement"
   ],
   "human_contribution": [
     "problem definition and product direction",
@@ -52,7 +56,8 @@
     "cross_browser_and_device_testing": "Pending; manual desktop/mobile browser, keyboard, touch, reduced-motion and screen-reader verification is still required.",
     "manual_route_and_accessibility_testing": "Pending; automated build and type checks passed on 14 November 2026, but manual testing of /, /explorer and /presentation remains required.",
     "scientific_validation": "pending; no validated lunar ephemeris or terrain-horizon backend is connected.",
-    "note": "A successful production build does not prove browser compatibility, complete human audit, error-free runtime behavior or scientific validity."
+    "note": "A successful production build does not prove browser compatibility, complete human audit, error-free runtime behavior or scientific validity.",
+    "review_status": "Updated 14 November 2026: the latest branding and interface refinement is being validated by GitHub Actions. This is not an independent line-by-line engineering audit or visual browser QA."
   },
   "generated_media": "No AI-generated photographs, images or videos are intentionally included.",
   "scientific_data": "The website must not present simulated or uncomputed values as validated measurements.",

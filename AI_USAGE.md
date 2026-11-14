@@ -76,8 +76,17 @@ The site no longer mounts React \`ViewTransition\` around the live Moon portal o
 
 ## Landing-page and navigator refinement — 14 November 2026
 
-The new LunaPath repository now contains the full application source. The landing page was refined around the user-requested flow: a direct navigator call to action, a 30-second interactive walkthrough, three workflow cards, traceable USGS reference locations, a source/methodology section, and project transparency. The walkthrough is an interactive UI guide rather than a video recording; it uses real catalogue coordinates and marks scientific outputs as not calculated.
+The new Lunex repository now contains the full application source. The landing page was refined around the user-requested flow: a direct navigator call to action, a 30-second interactive walkthrough, three workflow cards, traceable USGS reference locations, a source/methodology section, and project transparency. The walkthrough is an interactive UI guide rather than a video recording; it uses real catalogue coordinates and marks scientific outputs as not calculated.
 
 The public `/explorer` route now renders the existing mission-explorer demonstrator rather than a Coming Soon placeholder. It supports named USGS reference-feature selection, custom coordinate input, date and UTC-hour selection, map / global-Moon views, scenario comparisons and an illustrative timeline. It does not calculate observer-specific ephemerides, terrain-aware illumination, Earth-visibility windows, electrical power or an RF link budget.
 
 The starfield was refined with varied star sizes, a small number of restrained glints, pointer parallax, reduced-motion support and visibility-aware animation. Section reveals are enabled through the existing IntersectionObserver component. No external photographs, stock images, generated media, new runtime packages or new font services were added. The actual NASA GLB remains a local, uncommitted asset. Manual browser/device testing and local GLB verification remain necessary.
+
+ 
+## Lunex identity and motion refinement — 14 November 2026
+
+The public brand name is Lunex. The overview section now uses original vector artwork to explain lunar mission-planning factors without astronaut or satellite photographs. The diagram shows the relationship between a south-polar candidate location, the lunar horizon, sunlight and Earth-view context. Its status is explicitly illustrative and is not presented as a computed mission result.
+
+The shared page shell now mounts the existing scroll-reveal and custom-cursor components. The starfield uses a larger deterministic star set, restrained twinkle, occasional shooting-star trails on desktop, pointer parallax, visibility-aware pausing and reduced-motion handling. The custom cursor is supplemental to the native pointer, limited to fine mouse pointers, and disabled for touch and reduced-motion preferences.
+
+The navbar and its action-button styling were retained. Product naming, page metadata, project documentation and the footer were updated to Lunex. The only public image asset restored in this refinement is the previously supplied project favicon; astronaut and satellite imagery are not used by the landing page.

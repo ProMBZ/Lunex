@@ -1,6 +1,6 @@
 # Engineering and judging principles
 
-LunaPath is designed as a transparent, maintainable decision-support prototype, not a cinematic mockup pretending to be a validated mission system. Preserve these principles in every page and future feature.
+Lunex is designed as a transparent, maintainable decision-support prototype, not a cinematic mockup pretending to be a validated mission system. Preserve these principles in every page and future feature.
 
 ## 1. Scientific honesty and traceability
 

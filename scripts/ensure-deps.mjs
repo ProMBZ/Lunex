@@ -26,7 +26,7 @@ function findProblems() {
 
 let problems = findProblems();
 if (problems.length === 0) {
-  console.log('LunaPath dependencies verified: Next.js, React, React DOM and Three.js are installed.');
+  console.log('Lunex dependencies verified: Next.js, React, React DOM and Three.js are installed.');
   process.exit(0);
 }
 

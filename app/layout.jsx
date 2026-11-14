@@ -2,33 +2,20 @@ import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import Starfield from "./components/Starfield";
+import CustomCursor from "./components/CustomCursor";
+import RevealObserver from "./components/RevealObserver";
 
 export const metadata = {
-  title: {
-    default: "LunaPath — Lunar Landing Site Navigator",
-    template: "%s | LunaPath",
-  },
-  description:
-    "Explore the Moon in 3D, look at lunar south-polar locations, and understand the place-and-time questions behind a landing mission.",
-  applicationName: "LunaPath",
-  icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
-  },
-  keywords: [
-    "LunaPath",
-    "Lunar Landing Site Navigator",
-    "NASA Space Apps Challenge 2026",
-    "lunar south pole",
-    "lunar exploration",
-  ],
+  title: { default: "Lunex — Lunar Landing Site Navigator", template: "%s | Lunex" },
+  description: "Explore the Moon in 3D, examine lunar south-polar locations, and compare the place-and-time factors behind mission planning.",
+  applicationName: "Lunex",
+  icons: { icon: "/favicon.png", shortcut: "/favicon.png", apple: "/favicon.png" },
+  keywords: ["Lunex", "Lunar Landing Site Navigator", "NASA Space Apps Challenge 2026", "lunar south pole", "lunar mission planning"],
   openGraph: {
-    title: "LunaPath — Lunar Landing Site Navigator",
-    description:
-      "Explore the Moon in 3D and understand the place-and-time questions behind a lunar landing mission.",
+    title: "Lunex — Lunar Landing Site Navigator",
+    description: "Explore the Moon in 3D and examine the location, terrain, sunlight, Earth-view and time factors behind lunar mission planning.",
     type: "website",
-    siteName: "LunaPath",
+    siteName: "Lunex",
   },
 };
 
@@ -44,9 +31,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Starfield />
-        <a className="skip-link" href="#main-content">
-          Skip to content
-        </a>
+        <CustomCursor />
+        <RevealObserver />
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
         {children}
         <SiteFooter />

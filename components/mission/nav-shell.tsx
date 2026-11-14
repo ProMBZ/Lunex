@@ -37,7 +37,7 @@ export default function NavShell() {
       <div className="header-inner">
         <a className="header-brand" href="/" onClick={(event) => { event.preventDefault(); router.push("/", { transitionTypes: ["nav-back"] }); }}>
           <span className="header-brand-mark" aria-hidden="true"><i /><b /></span>
-          <span>LUNA<span>PATH</span></span>
+          <span>LUNEX</span>
         </a>
         <div className="header-nav-wrap" onClickCapture={(event: MouseEvent<HTMLDivElement>) => {
             const target = event.target;
@@ -50,7 +50,7 @@ export default function NavShell() {
             onChange={navigate}
             tone="dark"
             sound={false}
-            className="lunapath-liquid-nav"
+            className="lunex-liquid-nav"
           />
         </div>
         <a className="header-launch" href="/explorer" onClick={(event) => { event.preventDefault(); router.push("/explorer", { transitionTypes: ["nav-forward"] }); }}>

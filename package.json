@@ -1,8 +1,8 @@
 {
-  "name": "lunapath-lunar-landing-navigator",
+  "name": "lunex-lunar-landing-navigator",
   "version": "4.0.0",
   "private": true,
-  "description": "LunaPath — an interactive lunar south-pole site and mission-window exploration experience for NASA Space Apps Challenge 2026.",
+  "description": "Lunex — an interactive lunar south-pole site and mission-planning experience for NASA Space Apps Challenge 2026.",
   "scripts": {
     "predev": "node scripts/ensure-deps.mjs",
     "dev": "next dev",

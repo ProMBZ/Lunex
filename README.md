@@ -1,19 +1,19 @@
-# LunaPath — Lunar Landing Site Navigator
+# Lunex — Lunar Landing Site Navigator
 
-LunaPath is a family-built lunar exploration project for the 2026 NASA Space Apps Challenge. It helps people explore the Moon and understand the place-and-time questions that matter when thinking about a lunar landing mission.
+Lunex is a family-built lunar exploration project for the 2026 NASA Space Apps Challenge. It helps researchers and space explorers examine the location, terrain, sunlight, Earth-view and time factors that shape planning for a lunar mission.
 
 ## Website
 
-- \`/\` — landing page with an interactive 3D global Moon model and a plain-language project overview.
+- \`/\` — landing page with an interactive NASA LRO / LOLA 3D global Moon model and a plain-language project overview.
 - \`/presentation\` — Coming Soon page for the 30-second walkthrough.
 - \`/explorer\` — Coming Soon page for the Mission Explorer.
 
-The Mission Explorer interface and its supporting components remain in the codebase while the public destination is being prepared.
+The mission-exploration components and their data structures remain in the repository while the public destination is prepared.
 
-## Current project components
+## Project capabilities
 
 - Interactive NASA LRO / LOLA global Moon model for orientation.
-- Named lunar feature locations sourced from the USGS Gazetteer of Planetary Nomenclature.
+- Named lunar feature reference locations from the USGS Gazetteer of Planetary Nomenclature.
 - Custom lunar coordinate input and validation in the Mission Explorer implementation.
 - Observation date and UTC-hour controls in the Mission Explorer implementation.
 - Site and date scenario comparison in the Mission Explorer implementation.
@@ -52,12 +52,14 @@ If the file is elsewhere, use \`npm run model:select\`. The global model is for 
 
 NASA source: https://svs.gsfc.nasa.gov/14959/
 
-## Visual assets
+## Visual identity
 
-The landing page uses these public assets:
-- \`public/favicon.png\` — project logo and browser icon.
-- \`public/astronaut.jpg\` — animated astronaut artwork in the overview section.
-- \`public/satellite.png\` — animated satellite artwork in the overview section.
+The website uses the Lunex brand palette:
+- Blue: \`#0B3D91\`
+- Red: \`#FC3D21\`
+- White: \`#FFFFFF\`
+
+The landing overview uses original vector mission-planning artwork. The Moon model and scientific sources are documented in [SOURCES.md](SOURCES.md).
 
 ## Sources and credits
 

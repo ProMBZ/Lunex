@@ -96,7 +96,7 @@ export default function MissionExplorer() {
     <main id="main-content" className="mission-explorer-page">
       <section className="explorer-intro wrap">
         <div>
-          <div className="eyebrow"><span className="status-dot" /> LUNAPATH / MISSION EXPLORER</div>
+          <div className="eyebrow"><span className="status-dot" /> LUNEX / MISSION EXPLORER</div>
           <h1>One site.<br /><em>One mission window.</em></h1>
           <p>Choose a named south-polar feature or enter a custom observer coordinate. Then move through time and compare the questions a mission team needs to answer.</p>
         </div>

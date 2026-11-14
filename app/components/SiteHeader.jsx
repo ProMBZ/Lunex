@@ -11,7 +11,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="site-nav">
-        <Link className="brand" href="/" aria-label="LunaPath — Back to project information">
+        <Link className="brand" href="/" aria-label="Lunex — Back to project information">
           <Image
             className="brand-logo"
             src="/favicon.png"
@@ -20,7 +20,7 @@ export default function SiteHeader() {
             height={44}
             priority
           />
-          <span className="brand-name">LUNAPATH</span>
+          <span className="brand-name">LUNEX</span>
         </Link>
 
         <nav className="nav-actions" aria-label="Main navigation">

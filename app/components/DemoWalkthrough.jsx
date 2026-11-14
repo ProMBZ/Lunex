@@ -133,7 +133,7 @@ export default function DemoWalkthrough() {
             </div>
 
             <div className="demo-stage-aside">
-              <div className="demo-aside-index">LUNAPATH / 2026</div>
+              <div className="demo-aside-index">LUNEX / 2026</div>
               {activeStep === 0 && (
                 <div className="demo-coordinate-plate">
                   <span>SELECTED FEATURE</span>

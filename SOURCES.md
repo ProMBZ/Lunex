@@ -1,4 +1,4 @@
-# LunaPath — data and technical references
+# Lunex — data and technical references
 
 The Moon is rendered from the project's NASA GLB when that local binary is present. Project-overview and explanatory visuals are authored SVG illustrations and diagrams. Third-party source datasets and models remain subject to their own terms and are not relicensed under the project's source-code license.
 
