@@ -1,0 +1,38 @@
+{
+  "name": "lunapath-lunar-landing-navigator",
+  "version": "4.0.0",
+  "private": true,
+  "description": "LunaPath — an interactive lunar south-pole site and mission-window exploration experience for NASA Space Apps Challenge 2026.",
+  "scripts": {
+    "predev": "node scripts/ensure-deps.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/ensure-deps.mjs",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run build",
+    "model:find": "node scripts/setup-topo-model.mjs --discover-only",
+    "model:download": "node scripts/setup-topo-model.mjs --download",
+    "model:verify": "node scripts/verify-model.mjs",
+    "doctor": "node scripts/ensure-deps.mjs && node scripts/verify-model.mjs",
+    "model:select": "node scripts/select-model.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/node": "^22.19.7",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

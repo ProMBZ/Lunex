@@ -1,0 +1,21 @@
+LUNAPATH — NASA LRO / LOLA GLOBAL TOPOGRAPHIC MOON MODEL
+
+Required optional asset: Moon_NASA_LRO_8k_Topo_Small.glb (77.7 MB).
+
+RECOMMENDED DOWNLOAD (from the project root):
+  npm run model:download
+  npm run model:verify
+  npm run dev
+
+The download uses the NASA SVS source page:
+  https://svs.gsfc.nasa.gov/14959/
+
+The model is saved here:
+  public/models/Moon_NASA_LRO_8k_Topo_Small.glb
+
+If you already have the GLB locally, you can select it instead:
+  npm run model:select
+
+NASA describes this model as a global colour + height-map visualization. Its pinched poles are a known model artifact.
+It is for global orientation/context only, not a local south-pole DEM or a site-specific terrain-horizon calculation.
+Do not commit the 77.7 MB binary into the source repository.
