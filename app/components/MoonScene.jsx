@@ -19,6 +19,68 @@ function disposeNodeTree(root) {
   });
 }
 
+function createPreviewMoon() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1024;
+  canvas.height = 512;
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("A 2D canvas is unavailable for the Moon preview.");
+
+  context.fillStyle = "#aeb4bb";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  let seed = 14959;
+  const random = () => {
+    seed = (seed * 16807) % 2147483647;
+    return (seed - 1) / 2147483646;
+  };
+
+  for (let index = 0; index < 520; index += 1) {
+    const x = random() * canvas.width;
+    const y = random() * canvas.height;
+    const radius = 5 + random() * 35;
+    const gradient = context.createRadialGradient(
+      x - radius * 0.22,
+      y - radius * 0.22,
+      radius * 0.08,
+      x,
+      y,
+      radius
+    );
+    gradient.addColorStop(0, "rgba(76,82,91,.18)");
+    gradient.addColorStop(.58, "rgba(115,122,132,.1)");
+    gradient.addColorStop(.83, "rgba(225,228,232,.22)");
+    gradient.addColorStop(1, "rgba(78,85,94,.05)");
+    context.beginPath();
+    context.arc(x, y, radius, 0, Math.PI * 2);
+    context.fillStyle = gradient;
+    context.fill();
+  }
+
+  for (let index = 0; index < 190; index += 1) {
+    const x = random() * canvas.width;
+    const y = random() * canvas.height;
+    const radius = 2 + random() * 11;
+    context.beginPath();
+    context.ellipse(x, y, radius * 1.35, radius, random() * Math.PI, 0, Math.PI * 2);
+    context.strokeStyle = "rgba(72,78,87," + (0.07 + random() * 0.12) + ")";
+    context.lineWidth = 1 + random() * 2;
+    context.stroke();
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = 4;
+
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(1.16, 56, 40),
+    new THREE.MeshStandardMaterial({ map: texture, roughness: 1, metalness: 0 })
+  );
+  mesh.rotation.set(0.018, 0.16, -0.018);
+  mesh.userData.isPreview = true;
+  return mesh;
+}
+
 export default function MoonScene({ compact = false }) {
   const hostRef = useRef(null);
   const [status, setStatus] = useState("checking");
@@ -36,11 +98,12 @@ export default function MoonScene({ compact = false }) {
     let disposed = false;
     let visible = true;
     let modelRoot = null;
+    let previewMoon = null;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
-    camera.position.set(0, 0, compact ? 4.45 : 4.45);
+    camera.position.set(0, 0, 4.45);
 
     try {
       renderer = new THREE.WebGLRenderer({
@@ -54,14 +117,14 @@ export default function MoonScene({ compact = false }) {
       return undefined;
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, compact ? 1.35 : 1.55));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, compact ? 1.25 : 1.45));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.16;
     renderer.setClearColor(0x000000, 0);
     renderer.domElement.className = "moon-canvas";
     renderer.domElement.setAttribute("role", "img");
-    renderer.domElement.setAttribute("aria-label", "Interactive NASA LRO and LOLA global Moon model. Drag to rotate and use the scroll wheel or pinch to zoom. The global model is not a local landing-site elevation model.");
+    renderer.domElement.setAttribute("aria-label", "Interactive three-dimensional Moon preview, upgraded to the NASA LRO and LOLA global Moon model when it finishes loading. Drag to rotate and use the scroll wheel or pinch to zoom. The global model is for orientation, not a local landing-site elevation model.");
     renderer.domElement.setAttribute("tabindex", "0");
     host.appendChild(renderer.domElement);
 
@@ -72,6 +135,13 @@ export default function MoonScene({ compact = false }) {
     const fillLight = new THREE.DirectionalLight(0x0B3D91, 0.24);
     fillLight.position.set(3.2, -1.8, -3.7);
     scene.add(fillLight);
+
+    try {
+      previewMoon = createPreviewMoon();
+      scene.add(previewMoon);
+    } catch {
+      // The detailed model can still load if the lightweight preview cannot be created.
+    }
 
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -129,7 +199,7 @@ export default function MoonScene({ compact = false }) {
         const availability = await check.json();
         if (disposed) return;
         if (!availability.available) {
-          setMessage("The NASA GLB is not available to this runtime. Add Moon_NASA_LRO_8k_Topo_Small.glb to public/models and restart the app.");
+          setMessage("The NASA topographic model is not available in this runtime. The lightweight Moon preview remains available.");
           setStatus("missing");
           return;
         }
@@ -137,7 +207,9 @@ export default function MoonScene({ compact = false }) {
         setStatus("loading");
         const loader = new GLTFLoader();
         const gltf = await loader.loadAsync("/api/moon-model", (event) => {
-          if (!disposed && event.total > 0) setProgress(Math.min(99, Math.round(event.loaded / event.total * 100)));
+          if (!disposed && event.total > 0) {
+            setProgress(Math.min(99, Math.round(event.loaded / event.total * 100)));
+          }
         });
         if (disposed) {
           disposeNodeTree(gltf.scene);
@@ -165,6 +237,15 @@ export default function MoonScene({ compact = false }) {
           });
         });
         scene.add(modelRoot);
+
+        if (previewMoon) {
+          scene.remove(previewMoon);
+          previewMoon.geometry.dispose();
+          previewMoon.material.map?.dispose();
+          previewMoon.material.dispose();
+          previewMoon = null;
+        }
+
         setProgress(100);
         setStatus("ready");
       } catch (error) {
@@ -190,29 +271,34 @@ export default function MoonScene({ compact = false }) {
     };
   }, [compact]);
 
+  const hasError = status === "missing" || status === "load-error" || status === "webgl-error";
+  const isLoading = status === "checking" || status === "loading";
+
   return (
     <div className={compact ? "moon-scene moon-scene-compact" : "moon-scene"} ref={hostRef}>
-      {status !== "ready" && (
-        <div className={"moon-scene-state state-" + status}>
-          {status === "checking" || status === "loading" ? (
+      {isLoading && (
+        <div className="moon-load-indicator" role="status" aria-live="polite">
+          <span className="scene-spinner" />
+          <span className="moon-load-copy">
+            <b>{status === "checking" ? "Moon preview ready" : "Loading NASA LRO / LOLA"}</b>
+            <small>{status === "checking" ? "Preparing detailed surface data" : progress > 0 ? progress + "% transferred" : "Refining the global surface"}</small>
+          </span>
+          {status === "loading" && <span className="moon-load-progress"><i style={{ width: progress + "%" }} /></span>}
+        </div>
+      )}
+      {hasError && (
+        <div className={"moon-scene-state state-" + status} role="status">
+          {status === "missing" ? (
             <>
-              <span className="scene-spinner" />
-              <b>{status === "checking" ? "Checking the local Moon model" : "Loading NASA LRO / LOLA model"}</b>
-              <span className="scene-state-detail">{status === "checking" ? "Looking for the 77.7 MB global orientation asset" : progress > 0 ? progress + "% transferred" : "Preparing 3D geometry"}</span>
-              <div className="scene-progress"><i style={{ width: progress + "%" }} /></div>
-            </>
-          ) : status === "missing" ? (
-            <>
-              <b>Global Moon model not found</b>
+              <b>Preview mode</b>
               <p>{message}</p>
               <code>public/models/Moon_NASA_LRO_8k_Topo_Small.glb</code>
-              <small>Run npm run model:verify after placing the file in this folder.</small>
             </>
           ) : (
             <>
               <b>3D scene unavailable</b>
               <p>{message}</p>
-              <small>Check that the browser supports WebGL and that the GLB is a valid glTF 2.0 binary.</small>
+              <small>Check WebGL support and the local NASA GLB file.</small>
             </>
           )}
         </div>

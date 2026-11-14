@@ -4,7 +4,7 @@
   --color-luna-blue: #0B3D91;
   --color-luna-red: #FC3D21;
   --color-luna-white: #FFFFFF;
-  --font-sans: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-sans: var(--font-public-sans);
 }
 
 :root {
@@ -14,8 +14,9 @@
   --luna-white: #FFFFFF;
   --header-height: 88px;
   --page-width: 1360px;
-  --font-body: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
-  --font-display: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-body: var(--font-public-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), "SFMono-Regular", Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
@@ -926,4 +927,266 @@ html.reveal-enabled [data-reveal].is-visible { opacity: 1; transform: translate3
 @keyframes hero-orbit-rotation-reverse { to { transform: rotate(-333deg) scaleY(.48); } }
 @media (prefers-reduced-motion: reduce) {
   .moon-orbit-one, .moon-orbit-two { animation: none !important; }
+}
+
+/* Typography refinement: clear weights and NASA-aligned digital type hierarchy */
+body { font-family: var(--font-body); font-weight: 400; font-size: 16px; }
+.hero-copy h1 {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 5.2vw, 78px);
+  font-weight: 500;
+  letter-spacing: -.058em;
+  line-height: 1.015;
+}
+.hero-copy h1 span { font-weight: 400; letter-spacing: -.052em; }
+.hero-description { font-family: var(--font-body); font-weight: 400; }
+.hero-eyebrow, .hero-proofline, .section-eyebrow, .destination-eyebrow,
+.mission-visual-top, .mission-visual-foot, .mission-visual-index,
+.mission-visual-heading > div > span, .schematic-label, .schematic-small-label,
+.schematic-site-label, .schematic-moon-label, .mission-factor-row span,
+.destination-art-caption, .polar-visual-heading, .polar-coordinate,
+.polar-visual-readout span, .footer-project-note span, .footer-copyright {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+.hero-proofline { font-size: 9px; }
+.action-button { font-family: var(--font-body); font-size: clamp(14px, 1.05vw, 16px); font-weight: 600; letter-spacing: -.01em; }
+.button-play { font-size: 8px; }
+.overview-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.55vw, 62px);
+  font-weight: 500;
+  letter-spacing: -.058em;
+  line-height: 1.04;
+}
+.overview-copy h2 em { font-weight: 400; letter-spacing: -.05em; }
+.overview-lede { font-family: var(--font-body); font-weight: 400; }
+.overview-supporting { font-family: var(--font-body); font-size: 13px; }
+.overview-step h3 { font-family: var(--font-body); font-weight: 600; font-size: 14px; }
+.overview-step p { font-size: 12px; }
+.mission-visual-heading h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: -.025em; }
+.mission-factor-row b { font-family: var(--font-body); font-weight: 500; }
+.destination-status {
+  min-height: 40px;
+  padding-inline: 17px;
+  gap: 11px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .15em;
+}
+.destination-copy h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.25vw, 70px);
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: 1.02;
+}
+.destination-description { font-family: var(--font-body); font-size: 16px; font-weight: 400; }
+.destination-back { font-family: var(--font-body); font-weight: 550; }
+
+/* A polar-planning interface for Mission Explorer, distinct from the video Moon */
+.destination-card-explorer { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); }
+.destination-art-explorer {
+  display: flex;
+  min-height: 470px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 8px 8px;
+}
+.polar-visual-heading {
+  display: flex;
+  width: min(100%, 450px);
+  justify-content: space-between;
+  gap: 10px;
+  color: rgba(255,255,255,.72);
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+.polar-radar {
+  position: relative;
+  width: min(82%, 380px);
+  aspect-ratio: 1;
+  margin: 16px auto 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.38);
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,.11), rgba(11,61,145,.18) 58%, rgba(11,61,145,.04) 72%);
+  box-shadow: 0 0 0 16px rgba(255,255,255,.025), 0 0 75px rgba(255,255,255,.08), inset 0 0 42px rgba(255,255,255,.06);
+  isolation: isolate;
+}
+.polar-radar::before {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.11) 1px, transparent 1px);
+  background-size: 25% 25%;
+  content: "";
+  mask-image: radial-gradient(circle, black 20%, transparent 72%);
+}
+.polar-radar::after {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255,255,255,.16);
+  border-radius: 50%;
+  content: "";
+  transform: scale(.84);
+}
+.polar-radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+}
+.polar-radar-ring-outer { width: 88%; height: 88%; }
+.polar-radar-ring-middle { width: 61%; height: 61%; border-style: dashed; }
+.polar-radar-ring-inner { width: 31%; height: 31%; border-color: rgba(252,61,33,.55); }
+.polar-radar-cross { position: absolute; z-index: 1; background: rgba(255,255,255,.19); }
+.polar-radar-cross-horizontal { top: 50%; left: 6%; width: 88%; height: 1px; }
+.polar-radar-cross-vertical { top: 6%; left: 50%; width: 1px; height: 88%; }
+.polar-radar-sweep {
+  position: absolute;
+  z-index: 2;
+  inset: 3%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 295deg, rgba(252,61,33,.02) 315deg, rgba(252,61,33,.22) 356deg, transparent 360deg);
+  animation: polar-sweep 9s linear infinite;
+}
+@keyframes polar-sweep { to { transform: rotate(360deg); } }
+.polar-terrain-lines { position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; opacity: .68; }
+.polar-terrain-lines path {
+  stroke: rgba(255,255,255,.58);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 5;
+  vector-effect: non-scaling-stroke;
+}
+.polar-site-marker {
+  position: absolute;
+  z-index: 5;
+  top: 43%;
+  left: 58%;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(252,61,33,.85);
+  border-radius: 50%;
+  background: rgba(252,61,33,.12);
+  box-shadow: 0 0 25px rgba(252,61,33,.24);
+  transform: translate(-50%,-50%);
+}
+.polar-site-marker span { width: 8px; height: 8px; border-radius: 50%; background: var(--luna-red); box-shadow: 0 0 14px rgba(252,61,33,.9); }
+.polar-site-marker i {
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(252,61,33,.58);
+  border-radius: 50%;
+  animation: polar-marker-pulse 2.3s ease-out infinite;
+}
+@keyframes polar-marker-pulse { 0% { opacity: .8; transform: scale(.65); } 100% { opacity: 0; transform: scale(1.5); } }
+.polar-coordinate { position: absolute; z-index: 4; color: rgba(255,255,255,.68); font-size: 7px; letter-spacing: .12em; }
+.polar-coordinate-north { top: 4%; left: 50%; transform: translateX(-50%); }
+.polar-coordinate-south { bottom: 4%; left: 50%; transform: translateX(-50%); }
+.polar-coordinate-west { top: 50%; left: 3%; transform: translateY(-50%); }
+.polar-coordinate-east { top: 50%; right: 3%; transform: translateY(-50%); }
+.polar-visual-readout {
+  display: grid;
+  width: min(100%, 470px);
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 8px;
+}
+.polar-visual-readout > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 9px;
+  background: rgba(11,61,145,.34);
+}
+.polar-visual-readout span { color: rgba(255,255,255,.61); font-size: 7px; letter-spacing: .1em; }
+.polar-visual-readout b { color: var(--luna-white); font-family: var(--font-body); font-size: 9px; font-weight: 550; line-height: 1.35; overflow-wrap: anywhere; }
+.destination-art-explorer .destination-art-caption {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  width: min(100%,450px);
+  margin-top: 14px;
+  text-align: right;
+}
+@media (max-width: 780px) {
+  .destination-card-explorer { grid-template-columns: 1fr; }
+  .destination-art-explorer { min-height: 390px; }
+}
+@media (max-width: 520px) {
+  .hero-copy h1 { font-size: clamp(45px, 10.8vw, 58px); }
+  .action-button { font-size: 14px; }
+  .destination-status { min-height: 38px; font-size: 11px; }
+  .destination-copy h1 { font-size: 44px; }
+  .destination-art-explorer { min-height: 320px; padding-inline: 0; }
+  .polar-radar { width: min(78%, 285px); }
+  .polar-visual-heading { font-size: 6px; }
+  .polar-visual-readout { gap: 5px; }
+  .polar-visual-readout > div { padding: 8px 6px; }
+  .polar-visual-readout span { font-size: 6px; }
+  .polar-visual-readout b { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .polar-radar-sweep, .polar-site-marker i { animation: none !important; }
+}
+
+/* Immediate Moon preview and compact loading state */
+.moon-load-indicator {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 17px;
+  display: inline-flex;
+  max-width: calc(100% - 28px);
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(11,61,145,.82);
+  color: var(--luna-white);
+  box-shadow: 0 8px 25px rgba(11,61,145,.28);
+  backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.moon-load-indicator .scene-spinner { width: 15px; height: 15px; flex: 0 0 auto; border-width: 1.5px; }
+.moon-load-copy { display: grid; min-width: 0; gap: 1px; line-height: 1.3; }
+.moon-load-copy b { color: var(--luna-white); font-family: var(--font-body); font-size: 9px; font-weight: 600; white-space: nowrap; }
+.moon-load-copy small { color: rgba(255,255,255,.7); font-family: var(--font-body); font-size: 8px; white-space: nowrap; }
+.moon-load-progress { width: 48px; height: 2px; flex: 0 0 auto; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.2); }
+.moon-load-progress i { display: block; height: 100%; border-radius: inherit; background: var(--luna-red); transition: width 220ms ease; }
+.moon-scene-state {
+  inset: auto 12px 12px;
+  display: flex;
+  width: min(370px, calc(100% - 24px));
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 13px;
+  background: rgba(11,61,145,.84);
+  box-shadow: 0 10px 30px rgba(11,61,145,.2);
+  text-align: left;
+  backdrop-filter: blur(12px);
+}
+.moon-scene-state b { font-family: var(--font-body); font-size: 11px; font-weight: 600; }
+.moon-scene-state p { font-family: var(--font-body); font-size: 10px; line-height: 1.5; }
+.moon-scene-state code { font-size: 8px; }
+.moon-scene-state small { font-family: var(--font-body); font-size: 9px; }
+@media (max-width: 520px) {
+  .moon-load-indicator { bottom: 9px; min-height: 37px; gap: 8px; padding: 6px 10px; }
+  .moon-load-copy b { font-size: 8px; }
+  .moon-load-copy small { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .moon-load-indicator .scene-spinner { animation: none; }
 }

@@ -1,9 +1,14 @@
 import "./globals.css";
+import { Inter, Public_Sans, DM_Mono } from "next/font/google";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import Starfield from "./components/Starfield";
 import CustomCursor from "./components/CustomCursor";
 import RevealObserver from "./components/RevealObserver";
+
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const publicSans = Public_Sans({ subsets: ["latin"], display: "swap", variable: "--font-public-sans" });
+const dmMono = DM_Mono({ weight: ["400", "500"], subsets: ["latin"], display: "swap", variable: "--font-dm-mono" });
 
 export const metadata = {
   title: { default: "Lunex — Lunar Landing Site Navigator", template: "%s | Lunex" },
@@ -28,7 +33,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable + " " + publicSans.variable + " " + dmMono.variable}>
       <body>
         <Starfield />
         <CustomCursor />
