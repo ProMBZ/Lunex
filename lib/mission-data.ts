@@ -42,7 +42,7 @@ export const LUNAR_SITES: LunarSite[] = [
   {
     id: "malapert",
     name: "Mons Malapert",
-    featureType: "Mountain",
+    featureType: "Mons (mountain)",
     latitude: -85.98,
     longitude: -1.67,
     diameterKm: 67,

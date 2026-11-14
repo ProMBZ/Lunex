@@ -70,13 +70,12 @@ export default function DemoWalkthrough() {
             <span>3 CHAPTERS · 10 SECONDS EACH</span>
           </div>
 
-          <div className="demo-tabs" role="tablist" aria-label="Walkthrough chapters">
+          <div className="demo-tabs" role="group" aria-label="Walkthrough chapters">
             {chapters.map((chapter, index) => (
               <button
                 className={activeStep === index ? "demo-tab is-active" : "demo-tab"}
                 type="button"
-                role="tab"
-                aria-selected={activeStep === index}
+                aria-pressed={activeStep === index}
                 key={chapter.number}
                 onClick={() => selectStep(index)}
               >
