@@ -7,7 +7,7 @@ The Moon is rendered from the project's NASA GLB when that local binary is prese
 | Interactive global Moon model | NASA Goddard Space Flight Center Scientific Visualization Studio; Moon_NASA_LRO_8k_Topo_Small.glb, LRO-derived global colour + height-map model. | https://svs.gsfc.nasa.gov/14959/ |
 | Shackleton crater | USGS Gazetteer / IAU feature 5450; feature-centre reference coordinate shown in V1: 89.67° S, 129.78° E; listed diameter 20.92 km. | https://planetarynames.wr.usgs.gov/Feature/5450 |
 | de Gerlache crater | USGS Gazetteer / IAU feature 1439; feature-centre reference coordinate shown in V1: 88.48° S, 88.34° W; listed diameter 32.71 km. | https://planetarynames.wr.usgs.gov/Feature/1439 |
-| Mons Malapert | USGS Gazetteer / IAU feature 16338; feature-centre reference coordinate shown in V1: 85.98° S, 1.67° W; listed diameter 67 km. | https://planetarynames.wr.usgs.gov/Feature/16338 |
+| Mons Malapert | USGS Gazetteer / IAU feature 16338; feature-centre reference coordinate shown in V1: 85.98° S, 1.67° W; listed span 67 km. | https://planetarynames.wr.usgs.gov/Feature/16338 |
 | Lunar mapping and terrain inspection | LROC Quickmap, developed by Arizona State University; high-resolution lunar imagery and topographic layers. | https://quickmap.lroc.asu.edu/ |
 | Lunar 3D visualization | NASA Moon Trek. | https://trek.nasa.gov/moon/ |
 | Ephemeris geometry | NASA Jet Propulsion Laboratory Horizons System. A production calculation must define lunar observer, time standard, target IDs and reference frame. | https://ssd.jpl.nasa.gov/horizons/ |

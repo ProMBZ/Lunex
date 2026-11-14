@@ -81,8 +81,3 @@ The new LunaPath repository now contains the full application source. The landin
 The public `/explorer` route now renders the existing mission-explorer demonstrator rather than a Coming Soon placeholder. It supports named USGS reference-feature selection, custom coordinate input, date and UTC-hour selection, map / global-Moon views, scenario comparisons and an illustrative timeline. It does not calculate observer-specific ephemerides, terrain-aware illumination, Earth-visibility windows, electrical power or an RF link budget.
 
 The starfield was refined with varied star sizes, a small number of restrained glints, pointer parallax, reduced-motion support and visibility-aware animation. Section reveals are enabled through the existing IntersectionObserver component. No external photographs, stock images, generated media, new runtime packages or new font services were added. The actual NASA GLB remains a local, uncommitted asset. Manual browser/device testing and local GLB verification remain necessary.
-
-
-## Source and accessibility review — 14 November 2026
-
-The three featured USGS feature records were checked against their official Gazetteer entries. The centre coordinates and listed dimensions shown by LunaPath match the selected source records; Mons Malapert is labelled with its USGS-listed 67 km diameter, not a span. The walkthrough chapter controls use a simple pressed-button group rather than incomplete ARIA tab semantics. Mission Explorer date defaults are set after hydration so the server-rendered initial state cannot disagree with the browser's current UTC date. These changes were build-checked in GitHub Actions; full manual browser and assistive-technology QA remains outstanding.

@@ -25,8 +25,8 @@ export default function MissionExplorer() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [customApplied, setCustomApplied] = useState(false);
-  const [date, setDate] = useState("2026-11-14");
-  const [compareDate, setCompareDate] = useState("2026-11-21");
+  const [date, setDate] = useState(() => defaultObservationDate(0));
+  const [compareDate, setCompareDate] = useState(() => defaultObservationDate(7));
   const [hour, setHour] = useState(12);
   const [playing, setPlaying] = useState(false);
   const [compareMode, setCompareMode] = useState<CompareMode>("site");
@@ -58,11 +58,6 @@ export default function MissionExplorer() {
     usgsId: "USER INPUT / NOT A NAMED FEATURE",
     sourceUrl: "https://quickmap.lroc.asu.edu/"
   } : selected;
-
-  useEffect(() => {
-    setDate(defaultObservationDate(0));
-    setCompareDate(defaultObservationDate(7));
-  }, []);
 
   useEffect(() => {
     if (!playing) return undefined;

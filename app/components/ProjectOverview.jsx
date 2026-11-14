@@ -193,7 +193,7 @@ export default function ProjectOverview() {
                   </div>
                 </div>
                 <div className="reference-dimension">
-                  <span>"LISTED DIAMETER"</span>
+                  <span>{site.featureType === "Mountain" ? "LISTED SPAN" : "LISTED DIAMETER"}</span>
                   <b>{site.diameterKm.toFixed(2)} km</b>
                 </div>
                 <a href={site.sourceUrl} target="_blank" rel="noreferrer" className="reference-source">
