@@ -4,7 +4,7 @@
 
 Download the repository ZIP from the exact tested source commit:
 
-https://github.com/ProMBZ/Lunex/archive/880a27baa03c39aa3f5bb66fa67a23d6828c350d.zip
+https://github.com/ProMBZ/Lunex/archive/refs/heads/main.zip
 
 This is one file to transfer. Extract it once and keep the internal folders intact. Do not paste the entire application into a single TSX file: Next.js needs separate route, layout, stylesheet and API files.
 
