@@ -59,8 +59,8 @@ try {
   let env = '';
   try { env = await readFile(envPath, 'utf8'); } catch {}
   const normalized = target.replace(/\\/g, '/');
-  const line = `LUNAPATH_MOON_MODEL=${normalized}`;
-  const lines = env.split(/\r?\n/).filter((item) => !/^\s*LUNAPATH_MOON_MODEL\s*=/.test(item));
+  const line = `LUNEX_MOON_MODEL=${normalized}`;
+  const lines = env.split(/\r?\n/).filter((item) => !/^\s*(?:LUNEX|LUNAPATH)_MOON_MODEL\s*=/.test(item));
   lines.push(line);
   await writeFile(envPath, `${lines.filter(Boolean).join('\n')}\n`, 'utf8');
   console.log('\n✓ NASA lunar topographic model installed and selected.');

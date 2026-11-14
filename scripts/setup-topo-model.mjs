@@ -14,11 +14,12 @@ const discoverOnly = process.argv.includes('--discover-only') || !downloadMode;
 const profile = process.env.USERPROFILE || homedir();
 
 async function configuredPath() {
-  if (process.env.LUNAPATH_MOON_MODEL?.trim()) return process.env.LUNAPATH_MOON_MODEL.trim().replace(/^['"]|['"]$/g, '');
+  const modelEnv = process.env.LUNEX_MOON_MODEL?.trim() || process.env.LUNAPATH_MOON_MODEL?.trim();
+  if (modelEnv) return modelEnv.replace(/^['"]|['"]$/g, '');
   for (const envName of ['.env.local', '.env']) {
     try {
       const raw = await readFile(join(root, envName), 'utf8');
-      const line = raw.split(/\r?\n/).find((item) => /^\s*LUNAPATH_MOON_MODEL\s*=/.test(item));
+      const line = raw.split(/\r?\n/).find((item) => /^\s*(?:LUNEX|LUNAPATH)_MOON_MODEL\s*=/.test(item));
       if (line) return line.slice(line.indexOf('=') + 1).trim().replace(/^['"]|['"]$/g, '');
     } catch {}
   }
@@ -124,7 +125,7 @@ if (found) {
 }
 
 if (discoverOnly) {
-  if (process.platform === 'win32' && process.env.CI !== 'true' && process.env.LUNAPATH_SKIP_MODEL_PICKER !== '1') {
+  if (process.platform === 'win32' && process.env.CI !== 'true' && (process.env.LUNEX_SKIP_MODEL_PICKER || process.env.LUNAPATH_SKIP_MODEL_PICKER) !== '1') {
     console.warn('\nNASA topographic GLB was not found automatically. Opening a file picker so you can select the model you already downloaded...');
     const picker = spawnSync(process.execPath, [join(root, 'scripts', 'select-model.mjs'), '--interactive'], {
       cwd: root, stdio: 'inherit', env: process.env, windowsHide: false

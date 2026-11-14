@@ -19,6 +19,6 @@ try {
   console.log(`✓ Size: ${(info.size / 1024 / 1024).toFixed(1)} MB`);
 } catch (error) {
   console.error(`NASA model verification failed: ${error.message}`);
-  console.error('Copy the existing 77.7 MB Moon_NASA_LRO_8k_Topo_Small.glb to public/models/ or set LUNAPATH_MOON_MODEL in .env.local, then run npm run model:find.');
+  console.error('Copy the existing 77.7 MB Moon_NASA_LRO_8k_Topo_Small.glb to public/models/ or set LUNEX_MOON_MODEL in .env.local, then run npm run model:find.');
   process.exit(1);
 }

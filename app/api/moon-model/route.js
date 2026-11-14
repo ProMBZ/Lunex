@@ -31,7 +31,8 @@ async function validModel(file) {
 
 async function locateModel() {
   const profile = process.env.USERPROFILE || homedir();
-  const configured = process.env.LUNAPATH_MOON_MODEL?.trim().replace(/^['"]|['"]$/g, '');
+  const configuredValue = process.env.LUNEX_MOON_MODEL?.trim() || process.env.LUNAPATH_MOON_MODEL?.trim();
+  const configured = configuredValue?.replace(/^['"]|['"]$/g, '');
   const candidates = [];
   if (configured) candidates.push(isAbsolute(configured) ? configured : resolve(process.cwd(), configured));
   for (const name of MODEL_NAMES) {
@@ -61,7 +62,7 @@ export async function GET(request) {
       size: model?.size ?? null,
       sizeMB: model ? Number((model.size / 1024 / 1024).toFixed(1)) : null,
       expectedPath: 'public/models/Moon_NASA_LRO_8k_Topo_Small.glb',
-      configuredPath: process.env.LUNAPATH_MOON_MODEL ? 'configured' : null,
+      configuredPath: configuredValue ? 'configured' : null,
       source: 'NASA Goddard Space Flight Center / LRO / LOLA'
     });
   }
@@ -70,7 +71,7 @@ export async function GET(request) {
     return json({
       error: 'A valid NASA topographic GLB was not found. This is a local-file lookup issue, not a Three.js issue.',
       expectedPath: 'public/models/Moon_NASA_LRO_8k_Topo_Small.glb',
-      fix: 'Copy the 77.7 MB NASA GLB into public/models/, or set LUNAPATH_MOON_MODEL to its full path in .env.local, then run npm run model:find and restart.'
+      fix: 'Copy the 77.7 MB NASA GLB into public/models/, or set LUNEX_MOON_MODEL to its full path in .env.local, then run npm run model:find and restart.'
     }, 404);
   }
 
