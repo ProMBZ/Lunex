@@ -1,4 +1,6 @@
 import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Inter, Public_Sans, DM_Mono } from "next/font/google";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
@@ -10,7 +12,7 @@ const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-int
 const publicSans = Public_Sans({ subsets: ["latin"], display: "swap", variable: "--font-public-sans" });
 const dmMono = DM_Mono({ weight: ["400", "500"], subsets: ["latin"], display: "swap", variable: "--font-dm-mono" });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: { default: "Lunex — Lunar Landing Site Navigator", template: "%s | Lunex" },
   description: "Explore the Moon in 3D, examine lunar south-polar locations, and compare the place-and-time factors behind mission planning.",
   applicationName: "Lunex",
@@ -24,16 +26,16 @@ export const metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: "#0B3D91",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable + " " + publicSans.variable + " " + dmMono.variable}>
+    <html lang="en" className={`${inter.variable} ${publicSans.variable} ${dmMono.variable}`}>
       <body>
         <Starfield />
         <CustomCursor />

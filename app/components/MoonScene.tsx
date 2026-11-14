@@ -5,21 +5,21 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-function disposeNodeTree(root) {
+function disposeNodeTree(root: THREE.Object3D): void {
   root.traverse((object) => {
-    object.geometry?.dispose?.();
-    if (!object.material) return;
+    if (!(object instanceof THREE.Mesh)) return;
+    object.geometry.dispose();
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     materials.forEach((material) => {
       Object.values(material).forEach((value) => {
-        if (value?.isTexture) value.dispose();
+        if (value instanceof THREE.Texture) value.dispose();
       });
-      material.dispose?.();
+      material.dispose();
     });
   });
 }
 
-function createPreviewMoon() {
+function createPreviewMoon(): THREE.Mesh {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 512;
@@ -81,9 +81,13 @@ function createPreviewMoon() {
   return mesh;
 }
 
-export default function MoonScene({ compact = false }) {
-  const hostRef = useRef(null);
-  const [status, setStatus] = useState("checking");
+type SceneStatus = "checking" | "loading" | "ready" | "missing" | "load-error" | "webgl-error";
+type MoonSceneProps = { compact?: boolean };
+type ModelAvailability = { available: boolean };
+
+export default function MoonScene({ compact = false }: MoonSceneProps) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<SceneStatus>("checking");
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -91,14 +95,14 @@ export default function MoonScene({ compact = false }) {
     const host = hostRef.current;
     if (!host) return undefined;
 
-    let renderer;
-    let controls;
-    let resizeObserver;
-    let intersectionObserver;
+    let renderer: THREE.WebGLRenderer;
+    let controls: OrbitControls;
+    let resizeObserver: ResizeObserver;
+    let intersectionObserver: IntersectionObserver;
     let disposed = false;
     let visible = true;
-    let modelRoot = null;
-    let previewMoon = null;
+    let modelRoot: THREE.Group | null = null;
+    let previewMoon: THREE.Mesh | null = null;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
@@ -196,7 +200,7 @@ export default function MoonScene({ compact = false }) {
       try {
         const check = await fetch("/api/moon-model?status=1", { cache: "no-store" });
         if (!check.ok) throw new Error("The local Moon model status check failed.");
-        const availability = await check.json();
+        const availability = await check.json() as ModelAvailability;
         if (disposed) return;
         if (!availability.available) {
           setMessage("The NASA topographic model is not available in this runtime. The lightweight Moon preview remains available.");
@@ -225,14 +229,15 @@ export default function MoonScene({ compact = false }) {
         modelRoot.scale.setScalar(2.32 / maxAxis);
         modelRoot.rotation.set(0.018, 0.16, -0.018);
         modelRoot.traverse((object) => {
-          if (!object.isMesh) return;
+          if (!(object instanceof THREE.Mesh)) return;
           object.frustumCulled = true;
           object.castShadow = false;
           object.receiveShadow = false;
           const materials = Array.isArray(object.material) ? object.material : [object.material];
           materials.forEach((material) => {
-            if ("roughness" in material) material.roughness = Math.max(material.roughness ?? 0.84, 0.84);
-            if ("metalness" in material) material.metalness = 0;
+            const surface = material as THREE.Material & { roughness?: number; metalness?: number };
+            if (typeof surface.roughness === "number") surface.roughness = Math.max(surface.roughness, 0.84);
+            if (typeof surface.metalness === "number") surface.metalness = 0;
             material.needsUpdate = true;
           });
         });

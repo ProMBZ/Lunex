@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 const steps = [
   { number: "01", title: "Explore a region", description: "Inspect lunar south-polar locations and the coordinates that identify them." },
@@ -93,7 +94,7 @@ export default function ProjectOverview() {
           </p>
           <div className="overview-steps">
             {steps.map((step, index) => (
-              <article className="overview-step" key={step.number} data-reveal="up" style={{ "--reveal-delay": index * 90 + "ms" }}>
+              <article className="overview-step" key={step.number} data-reveal="up" style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}>
                 <span className="overview-step-number">{step.number}</span>
                 <div><h3>{step.title}</h3><p>{step.description}</p></div>
               </article>

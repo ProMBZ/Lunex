@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 export default function CustomCursor() {
-  const cursorRef = useRef(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -18,7 +18,7 @@ export default function CustomCursor() {
     let lastY = -100;
     const interactiveSelector = "a, button, input, select, textarea, [role='button']";
 
-    const move = (event) => {
+    const move = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
       lastX = event.clientX;
       lastY = event.clientY;
@@ -33,7 +33,7 @@ export default function CustomCursor() {
     };
 
     const leave = () => cursor.classList.remove("is-visible", "is-interactive", "is-pressed");
-    const down = (event) => { if (event.pointerType === "mouse") cursor.classList.add("is-pressed"); };
+    const down = (event: PointerEvent) => { if (event.pointerType === "mouse") cursor.classList.add("is-pressed"); };
     const up = () => cursor.classList.remove("is-pressed");
     const motionChanged = () => { if (motionQuery.matches) leave(); };
     const visibilityChanged = () => { if (document.visibilityState === "hidden") leave(); };

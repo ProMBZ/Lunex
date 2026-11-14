@@ -7,10 +7,12 @@ import { Readable } from 'node:stream';
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
+type MoonModel = { file: string; size: number; modified: number };
+
 const MODEL_NAMES = ['Moon_NASA_LRO_8k_Topo_Small.glb', 'Moon_NASA_LRO_8k_Topo.glb'];
 const MIN_BYTES = 60 * 1024 * 1024;
 
-async function validModel(file) {
+async function validModel(file: string): Promise<MoonModel | null> {
   try {
     await access(file);
     const info = await stat(file);
@@ -29,7 +31,7 @@ async function validModel(file) {
   }
 }
 
-async function locateModel() {
+async function locateModel(): Promise<MoonModel | null> {
   const profile = process.env.USERPROFILE || homedir();
   const configuredValue = process.env.LUNEX_MOON_MODEL?.trim() || process.env.LUNAPATH_MOON_MODEL?.trim();
   const configured = configuredValue?.replace(/^['"]|['"]$/g, '');
@@ -48,11 +50,11 @@ async function locateModel() {
   return null;
 }
 
-function json(payload, status = 200) {
+function json(payload: unknown, status = 200): Response {
   return Response.json(payload, { status, headers: { 'Cache-Control': 'no-store' } });
 }
 
-export async function GET(request) {
+export async function GET(request: Request): Promise<Response> {
   const model = await locateModel();
   const url = new URL(request.url);
 
@@ -76,13 +78,13 @@ export async function GET(request) {
   }
 
   const range = request.headers.get('range');
-  const headers = {
+  const headers = new Headers({
     'Content-Type': 'model/gltf-binary',
     'Accept-Ranges': 'bytes',
     'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
     'X-Asset-Source': 'NASA GSFC SVS / LRO / LOLA - global colour + height model',
     'Last-Modified': new Date(model.modified).toUTCString()
-  };
+  });
 
   if (range) {
     const match = range.match(/^bytes=(\d*)-(\d*)$/);
@@ -92,11 +94,11 @@ export async function GET(request) {
     if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 0 || end < start || start >= model.size) {
       return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${model.size}` } });
     }
-    headers['Content-Length'] = String(end - start + 1);
-    headers['Content-Range'] = `bytes ${start}-${end}/${model.size}`;
-    return new Response(Readable.toWeb(createReadStream(model.file, { start, end })), { status: 206, headers });
+    headers.set('Content-Length', String(end - start + 1));
+    headers.set('Content-Range', `bytes ${start}-${end}/${model.size}`);
+    return new Response(Readable.toWeb(createReadStream(model.file, { start, end })) as ReadableStream<Uint8Array>, { status: 206, headers });
   }
 
-  headers['Content-Length'] = String(model.size);
-  return new Response(Readable.toWeb(createReadStream(model.file)), { status: 200, headers });
+  headers.set('Content-Length', String(model.size));
+  return new Response(Readable.toWeb(createReadStream(model.file)) as ReadableStream<Uint8Array>, { status: 200, headers });
 }

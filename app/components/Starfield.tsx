@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from "react";
 
+type Star = { x: number; y: number; radius: number; alpha: number; depth: number; phase: number; twinkle: number; bright: boolean; accent: boolean; cross: boolean };
+type Meteor = { x: number; y: number; vx: number; vy: number; age: number; duration: number };
+
 export default function Starfield() {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -12,10 +15,11 @@ export default function Starfield() {
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let width = 0, height = 0, pixelRatio = 1, frame = 0, lastFrame = 0;
-    let running = false, mouseX = 0.5, mouseY = 0.5, stars = [], meteors = [];
+    let running = false, mouseX = 0.5, mouseY = 0.5;
+    let stars: Star[] = [], meteors: Meteor[] = [];
     let nextMeteorAt = 5000;
 
-    const randomSource = (initialSeed) => {
+    const randomSource = (initialSeed: number) => {
       let seed = initialSeed;
       return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
     };

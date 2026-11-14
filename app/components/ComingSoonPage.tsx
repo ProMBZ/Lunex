@@ -53,7 +53,9 @@ function ExplorerVisual() {
   );
 }
 
-export default function ComingSoonPage({ eyebrow, title, description, variant = "presentation" }) {
+type ComingSoonPageProps = { eyebrow: string; title: string; description: string; variant?: "presentation" | "explorer" };
+
+export default function ComingSoonPage({ eyebrow, title, description, variant = "presentation" }: ComingSoonPageProps) {
   const isExplorer = variant === "explorer";
   return (
     <main id="main-content" className="destination-page">

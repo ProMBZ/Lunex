@@ -10,7 +10,7 @@ export default function RevealObserver() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("reveal-enabled");
-    const targets = Array.from(document.querySelectorAll("[data-reveal]"));
+    const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (motionPreference.matches || !("IntersectionObserver" in window)) {
