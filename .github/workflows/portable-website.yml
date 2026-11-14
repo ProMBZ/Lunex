@@ -36,3 +36,12 @@ jobs:
         run: npm run typecheck
       - name: Production build
         run: npm run build
+      - name: Create portable package archive
+        run: zip -r /tmp/lunex-portable-website.zip . -x "node_modules/*" ".next/*" "package-lock.json"
+      - name: Upload portable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: lunex-portable-website
+          path: /tmp/lunex-portable-website.zip
+          if-no-files-found: error
+          retention-days: 90
