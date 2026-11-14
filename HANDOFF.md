@@ -49,6 +49,10 @@ NASA source: https://svs.gsfc.nasa.gov/14959/
 
 The model is for global orientation, not a local south-pole DEM or landing-safety calculation.
 
+## Logo asset note
+
+The repository currently does not contain `public/favicon.png`, although the header, footer and metadata still reference it. Bring that file from the original local project if it is available, or replace those references with the destination project's logo. It is not part of the ZIP.
+
 ## Local run
 
 ```bash
