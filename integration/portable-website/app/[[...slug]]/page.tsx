@@ -278,7 +278,7 @@ function MoonScene({ compact = false, modelUrl }: MoonSceneProps) {
         </div>
       )}
       {hasError && (
-        <div className={"lunex-moon-scene-state state-" + status} role="status">
+        <div className={"lunex-moon-scene-state lunex-state-" + status} role="status">
           {status === "missing" ? (
             <>
               <b>Preview mode</b>
@@ -441,11 +441,11 @@ function LunexHome({ basePath, modelUrl }: { basePath: string; modelUrl: string 
               <a className="lunex-action-button lunex-action-button-primary" href={basePath + "/explorer"}>
                 <span>Open Mission Explorer</span>
                 <span className="lunex-button-arrow" aria-hidden="true">↗</span>
-              </Link>
+              </a>
               <a className="lunex-action-button lunex-action-button-secondary" href={basePath + "/presentation"}>
                 <span className="lunex-button-play" aria-hidden="true">▶</span>
                 <span>Watch 30 Seconds</span>
-              </Link>
+              </a>
             </div>
 
             <div className="lunex-hero-proofline" aria-label="What Lunex brings together">
@@ -551,7 +551,7 @@ function ComingSoonPage({ eyebrow, title, description, basePath, variant = "pres
           <div className="lunex-destination-status"><i aria-hidden="true" />COMING SOON</div>
           <h1 id="destination-title">{title}</h1>
           <p className="lunex-destination-description">{description}</p>
-          <a className="lunex-destination-back" href={basePath || "/"}><span aria-hidden="true">←</span>Back to Project Information</Link>
+          <a className="lunex-destination-back" href={basePath || "/"}><span aria-hidden="true">←</span>Back to Project Information</a>
         </div>
         {isExplorer ? <ExplorerVisual /> : <PresentationVisual />}
       </section>
@@ -778,25 +778,24 @@ export function CustomCursor() {
     let lastY = -100;
     const interactiveSelector = "a, button, input, select, textarea, [role='button']";
 
-    const leave = () => cursor.classList.remove("is-visible", "is-interactive", "is-pressed");
+    const leave = () => cursor.classList.remove("lunex-is-visible", "lunex-is-interactive", "lunex-is-pressed");
     const move = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
       const target = event.target;
       if (!(target instanceof Element) || !target.closest("[data-lunex-root]")) { leave(); return; }
       lastX = event.clientX;
       lastY = event.clientY;
-      const target = event.target;
       const interactive = target instanceof Element && Boolean(target.closest(interactiveSelector));
-      cursor.classList.toggle("is-interactive", interactive);
-      cursor.classList.add("is-visible");
+      cursor.classList.toggle("lunex-is-interactive", interactive);
+      cursor.classList.add("lunex-is-visible");
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
         cursor.style.transform = "translate3d(" + lastX + "px," + lastY + "px,0) translate(-50%,-50%)";
       });
     };
 
-    const down = (event: PointerEvent) => { if (event.pointerType === "mouse") cursor.classList.add("is-pressed"); };
-    const up = () => cursor.classList.remove("is-pressed");
+    const down = (event: PointerEvent) => { if (event.pointerType === "mouse") cursor.classList.add("lunex-is-pressed"); };
+    const up = () => cursor.classList.remove("lunex-is-pressed");
     const motionChanged = () => { if (motionQuery.matches) leave(); };
     const visibilityChanged = () => { if (document.visibilityState === "hidden") leave(); };
 
@@ -826,22 +825,22 @@ function RevealObserver({ routeKey }: { routeKey: string }) {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>("[data-lunex-root]");
     if (!root) return undefined;
-    root.classList.add("reveal-enabled");
+    root.classList.add("lunex-reveal-enabled");
     const targets = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motionPreference.matches || !("IntersectionObserver" in window)) {
-      targets.forEach((target) => target.classList.add("is-visible"));
-      return () => root.classList.remove("reveal-enabled");
+      targets.forEach((target) => target.classList.add("lunex-is-visible"));
+      return () => root.classList.remove("lunex-reveal-enabled");
     }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
+        entry.target.classList.add("lunex-is-visible");
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
     targets.forEach((target) => observer.observe(target));
-    return () => { observer.disconnect(); root.classList.remove("reveal-enabled"); };
+    return () => { observer.disconnect(); root.classList.remove("lunex-reveal-enabled"); };
   }, [routeKey]);
   return null;
 }
