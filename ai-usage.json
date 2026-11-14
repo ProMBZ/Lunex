@@ -1,0 +1,50 @@
+{
+  "project": "LunaPath",
+  "challenge": "Lunar Landing Site Navigator",
+  "ai_tools": [
+    {
+      "name": "ChatGPT",
+      "provider": "OpenAI",
+      "model": "GPT-6",
+      "role": "AI coding and writing assistant"
+    }
+  ],
+  "assisted_areas": [
+    "Next.js and React page structure",
+    "Three.js visualization scaffolding and interaction handling",
+    "CSS and responsive layout",
+    "local asset setup and validation scripts",
+    "accessibility and explanatory UI copy",
+    "project documentation",
+    "Compact homepage redesign and plain-language project introduction",
+    "Responsive two-destination navigation and Coming Soon / In Progress routes",
+    "Canvas starfield with pointer parallax, twinkle, reduced-motion and visibility handling",
+    "Transparent presentation of the existing NASA Moon GLB",
+    "Project Overview copy and authored SVG lunar mission illustration",
+    "Refined placeholder-page layouts for Landing Explorer and Presentation",
+    "Footer navigation and resource attribution with working return-to-top control",
+    "Accessible custom cursor halo and active navigation refinement",
+    "Local shadcn-compatible button primitive without a new runtime dependency"
+  ],
+  "human_contribution": [
+    "problem definition and product direction",
+    "feature prioritization and design feedback",
+    "technical and scientific-integrity requirements",
+    "human-guided review of the page structure, visible interface direction and scientific caveats",
+    "iterative feedback and final project ownership"
+  ],
+  "review_status": {
+    "human_review": "Human-guided product and implementation review was performed through requirements, design feedback and iterative corrections. This is not an independent line-by-line engineering audit.",
+    "archive_integrity": "passed on 2026-11-13 in GitHub Actions",
+    "clean_dependency_install": "npm ci passed on a clean GitHub Actions runner on 2026-11-13",
+    "production_build": "npm run build passed on a clean GitHub Actions runner on 2026-11-13",
+    "build_warnings": "A non-fatal Next.js tracing warning was emitted for dynamic filesystem lookup in app/api/moon-model/route.js.",
+    "cross_browser_and_device_testing": "Pending after the latest refinement; GitHub Actions validates installation, TypeScript and production build only.",
+    "manual_route_and_accessibility_testing": "Pending after the 13 November 2026 Project Overview, footer, placeholder-page and cursor refinements; keyboard, touch, reduced-motion and browser appearance still require manual verification.",
+    "scientific_validation": "pending; no validated lunar ephemeris or terrain-horizon backend is connected",
+    "note": "A successful production build does not prove browser compatibility, complete human audit, error-free runtime behavior or scientific validity."
+  },
+  "generated_media": "No AI-generated photographs, images or videos are intentionally included.",
+  "scientific_data": "The website must not present simulated or uncomputed values as validated measurements.",
+  "note": "Latest change adds an authored SVG project illustration, project overview, resource footer, accessible scroll-to-top button, desktop mouse halo and refined destination routes. It does not connect ephemeris, local DEM horizon, power or RF calculations."
+}
