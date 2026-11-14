@@ -40,7 +40,7 @@ export default function Starfield() {
       });
     };
 
-    const draw = (time) => {
+    const draw = (time: number) => {
       context.clearRect(0, 0, width, height);
       for (const star of stars) {
         const parallaxX = motionQuery.matches ? 0 : (mouseX - 0.5) * star.depth * 17;
@@ -106,7 +106,7 @@ export default function Starfield() {
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       makeStars(); meteors = []; nextMeteorAt = 5000; draw(0);
     };
-    const animate = (time) => {
+    const animate = (time: number) => {
       if (!running) return;
       frame = window.requestAnimationFrame(animate);
       if (time - lastFrame < 32) return;
@@ -117,7 +117,7 @@ export default function Starfield() {
       running = true; frame = window.requestAnimationFrame(animate);
     };
     const stop = () => { running = false; window.cancelAnimationFrame(frame); };
-    const onPointerMove = (event) => {
+    const onPointerMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
       mouseX = event.clientX / Math.max(width, 1); mouseY = event.clientY / Math.max(height, 1);
     };

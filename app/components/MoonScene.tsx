@@ -6,12 +6,12 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 function disposeNodeTree(root: THREE.Object3D): void {
-  root.traverse((object) => {
+  root.traverse((object: THREE.Object3D) => {
     if (!(object instanceof THREE.Mesh)) return;
     object.geometry.dispose();
     const materials = Array.isArray(object.material) ? object.material : [object.material];
-    materials.forEach((material) => {
-      Object.values(material).forEach((value) => {
+    materials.forEach((material: THREE.Material) => {
+      Object.values(material).forEach((value: unknown) => {
         if (value instanceof THREE.Texture) value.dispose();
       });
       material.dispose();
@@ -19,7 +19,7 @@ function disposeNodeTree(root: THREE.Object3D): void {
   });
 }
 
-function createPreviewMoon(): THREE.Mesh {
+function createPreviewMoon(): THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial> {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 512;
@@ -102,7 +102,7 @@ export default function MoonScene({ compact = false }: MoonSceneProps) {
     let disposed = false;
     let visible = true;
     let modelRoot: THREE.Group | null = null;
-    let previewMoon: THREE.Mesh | null = null;
+    let previewMoon: THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial> | null = null;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
@@ -184,7 +184,7 @@ export default function MoonScene({ compact = false }: MoonSceneProps) {
     intersectionObserver.observe(host);
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onMotionChange = (event) => {
+    const onMotionChange = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches;
       controls.autoRotate = !reducedMotion;
     };
@@ -210,7 +210,7 @@ export default function MoonScene({ compact = false }: MoonSceneProps) {
 
         setStatus("loading");
         const loader = new GLTFLoader();
-        const gltf = await loader.loadAsync("/api/moon-model", (event) => {
+        const gltf = await loader.loadAsync("/api/moon-model", (event: ProgressEvent) => {
           if (!disposed && event.total > 0) {
             setProgress(Math.min(99, Math.round(event.loaded / event.total * 100)));
           }
@@ -228,13 +228,13 @@ export default function MoonScene({ compact = false }: MoonSceneProps) {
         modelRoot.position.sub(center);
         modelRoot.scale.setScalar(2.32 / maxAxis);
         modelRoot.rotation.set(0.018, 0.16, -0.018);
-        modelRoot.traverse((object) => {
+        modelRoot.traverse((object: THREE.Object3D) => {
           if (!(object instanceof THREE.Mesh)) return;
           object.frustumCulled = true;
           object.castShadow = false;
           object.receiveShadow = false;
           const materials = Array.isArray(object.material) ? object.material : [object.material];
-          materials.forEach((material) => {
+          materials.forEach((material: THREE.Material) => {
             const surface = material as THREE.Material & { roughness?: number; metalness?: number };
             if (typeof surface.roughness === "number") surface.roughness = Math.max(surface.roughness, 0.84);
             if (typeof surface.metalness === "number") surface.metalness = 0;
