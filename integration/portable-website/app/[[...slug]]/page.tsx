@@ -389,11 +389,11 @@ function MissionSchematic() {
 
 function ProjectOverview({ basePath }: { basePath: string }) {
   return (
-    <section className="lunex-overview-section" id="project-overview" aria-labelledby="overview-title">
+    <section className="lunex-overview-section" id="lunex-project-overview" aria-labelledby="lunex-overview-title">
       <div className="lunex-overview-shell">
-        <div className="lunex-overview-copy" data-reveal="left">
+        <div className="lunex-overview-copy" data-lunex-reveal="left">
           <p className="lunex-section-eyebrow"><span aria-hidden="true" />WHAT IS LUNEX?</p>
-          <h2 id="overview-title">A clearer view of<br /><em>lunar mission planning.</em></h2>
+          <h2 id="lunex-overview-title">A clearer view of<br /><em>lunar mission planning.</em></h2>
           <p className="lunex-overview-lede">
             Lunex is an interactive mission-planning platform focused on the Moon’s south pole. It brings a 3D view of the lunar surface together with location data and observation-time controls, helping researchers and space explorers examine how place, terrain, sunlight and Earth visibility shape a mission scenario.
           </p>
@@ -402,7 +402,7 @@ function ProjectOverview({ basePath }: { basePath: string }) {
           </p>
           <div className="lunex-overview-steps">
             {steps.map((step, index) => (
-              <article className="lunex-overview-step" key={step.number} data-reveal="up" style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}>
+              <article className="lunex-overview-step" key={step.number} data-lunex-reveal="up" style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}>
                 <span className="lunex-overview-step-number">{step.number}</span>
                 <div><h3>{step.title}</h3><p>{step.description}</p></div>
               </article>
@@ -410,7 +410,7 @@ function ProjectOverview({ basePath }: { basePath: string }) {
           </div>
           <a className="lunex-overview-link" href={basePath + "/explorer"}><span>Open Mission Explorer</span><span aria-hidden="true">↗</span></a>
         </div>
-        <div data-reveal="scale"><MissionSchematic /></div>
+        <div data-lunex-reveal="scale"><MissionSchematic /></div>
       </div>
     </section>
   );
@@ -418,10 +418,10 @@ function ProjectOverview({ basePath }: { basePath: string }) {
 
 function LunexHome({ basePath, modelUrl }: { basePath: string; modelUrl: string }) {
   return (
-    <main id="main-content" className="lunex-home-page">
+    <main id="lunex-main-content" className="lunex-home-page">
       <section className="lunex-hero-main" aria-labelledby="hero-title">
         <div className="lunex-hero-layout">
-          <div className="lunex-hero-copy" data-reveal="left">
+          <div className="lunex-hero-copy" data-lunex-reveal="left">
             <p className="lunex-hero-eyebrow">
               <span className="lunex-eyebrow-mark" aria-hidden="true" />
               LUNAR LANDING SITE NAVIGATOR
@@ -460,7 +460,7 @@ function LunexHome({ basePath, modelUrl }: { basePath: string; modelUrl: string 
             </p>
           </div>
 
-          <div className="lunex-moon-column" data-reveal="scale" aria-label="Interactive three-dimensional Moon model">
+          <div className="lunex-moon-column" data-lunex-reveal="scale" aria-label="Interactive three-dimensional Moon model">
             <div className="lunex-moon-aura" aria-hidden="true" />
             <div className="lunex-moon-orbit lunex-moon-orbit-one" aria-hidden="true" />
             <div className="lunex-moon-orbit lunex-moon-orbit-two" aria-hidden="true" />
@@ -475,7 +475,7 @@ function LunexHome({ basePath, modelUrl }: { basePath: string; modelUrl: string 
           </div>
         </div>
 
-        <a className="lunex-hero-scroll-cue" href="#project-overview">
+        <a className="lunex-hero-scroll-cue" href="#lunex-project-overview">
           <span>DISCOVER LUNEX</span>
           <i aria-hidden="true" />
         </a>
@@ -544,12 +544,12 @@ type ComingSoonPageProps = { eyebrow: string; title: string; description: string
 function ComingSoonPage({ eyebrow, title, description, basePath, variant = "presentation" }: ComingSoonPageProps) {
   const isExplorer = variant === "explorer";
   return (
-    <main id="main-content" className="lunex-destination-page">
-      <section className={isExplorer ? "lunex-destination-card lunex-destination-card-explorer" : "lunex-destination-card"} aria-labelledby="destination-title">
+    <main id="lunex-main-content" className="lunex-destination-page">
+      <section className={isExplorer ? "lunex-destination-card lunex-destination-card-explorer" : "lunex-destination-card"} aria-labelledby="lunex-destination-title">
         <div className="lunex-destination-copy">
           <p className="lunex-destination-eyebrow"><span aria-hidden="true" />{eyebrow}</p>
           <div className="lunex-destination-status"><i aria-hidden="true" />COMING SOON</div>
-          <h1 id="destination-title">{title}</h1>
+          <h1 id="lunex-destination-title">{title}</h1>
           <p className="lunex-destination-description">{description}</p>
           <a className="lunex-destination-back" href={basePath || "/"}><span aria-hidden="true">←</span>Back to Project Information</a>
         </div>
@@ -826,7 +826,7 @@ function RevealObserver({ routeKey }: { routeKey: string }) {
     const root = document.querySelector<HTMLElement>("[data-lunex-root]");
     if (!root) return undefined;
     root.classList.add("lunex-reveal-enabled");
-    const targets = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const targets = Array.from(root.querySelectorAll<HTMLElement>("[data-lunex-reveal]"));
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motionPreference.matches || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add("lunex-is-visible"));
@@ -889,7 +889,7 @@ export default function PortableLunexPage() {
       <Starfield />
       <CustomCursor />
       <RevealObserver routeKey={route} />
-      <a className="lunex-skip-link" href="#main-content">Skip to content</a>
+      <a className="lunex-skip-link" href="#lunex-main-content">Skip to content</a>
       <SiteHeader basePath={basePath} isHome={isHome} iconUrl={iconUrl} />
       {route === "/presentation" ? (
         <ComingSoonPage basePath={basePath} eyebrow="LUNEX / QUICK INTRODUCTION" title="See the idea in 30 seconds."
